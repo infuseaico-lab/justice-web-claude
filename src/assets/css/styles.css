@@ -564,9 +564,6 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
 .site-footer a:hover { color: var(--amber-500); text-decoration: underline; }
 .footer-contact li { display: flex; gap: 10px; align-items: flex-start; }
 .footer-contact svg { flex: none; width: 18px; height: 18px; margin-top: 4px; color: var(--teal-500); }
-.footer-social { display: flex; gap: 10px; margin-top: 20px; }
-.footer-social a { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); }
-.footer-social svg { width: 18px; height: 18px; }
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-block: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; }
 .footer-bottom p { margin: 0; }
 .footer-disclaimer { padding-bottom: 24px; font-size: 0.8125rem; color: #8797b0; max-width: 900px; }
@@ -646,3 +643,26 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
   .gallery-filters::-webkit-scrollbar { display: none; }
   .gallery-filters .pill { flex: none; }
 }
+
+/* ---------- Top bar ---------- */
+.topbar { background: #f6b941; color: #16243b; font-size: 0.875rem; font-weight: 700; }
+.topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 40px; }
+.topbar-text { display: flex; align-items: center; gap: 8px; margin: 0; }
+.topbar-text svg { width: 16px; height: 16px; flex: none; }
+.topbar-text .short { display: none; }
+.topbar-social { display: flex; align-items: center; gap: 4px; }
+.topbar-icon { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; color: #16243b; transition: background-color 0.2s, color 0.2s; }
+.topbar-icon svg { width: 16px; height: 16px; }
+a.topbar-icon:hover { background: #16243b; color: #f6b941; }
+.footer-social { display: flex; gap: 10px; margin-top: 20px; }
+.footer-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); color: #d6e0ee; }
+.footer-icon svg { width: 18px; height: 18px; }
+a.footer-icon:hover { background: #f6b941; color: #16243b; }
+@media (max-width: 479px) {
+  .topbar { font-size: 0.8125rem; }
+  .topbar-text .long { display: none; }
+  .topbar-text .short { display: inline; }
+  .topbar-icon { width: 30px; height: 30px; }
+}
+/* A backdrop filter would trap the fixed menu drawer inside the header; drop it while the menu is open. */
+body.nav-open .site-header { -webkit-backdrop-filter: none; backdrop-filter: none; background: #fff; }

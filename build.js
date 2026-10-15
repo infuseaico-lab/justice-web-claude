@@ -77,6 +77,29 @@ const icon = (name, extra = '') =>
   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"${extra}>${ICONS[name] || ICONS.check}</svg>`;
 const ico = (name, cls = '') => `<span class="ico ${cls}">${icon(name)}</span>`;
 
+const BRANDS = require('./src/content/social-icons');
+// Social profile icons; each becomes a link once its URL is set in site.config.js.
+function socialIcons(cls) {
+  return Object.keys(BRANDS)
+    .map((k) => {
+      const b = BRANDS[k];
+      const svg = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="${b.path}"/></svg>`;
+      const url = site.social[k];
+      return url
+        ? `<a class="${cls}" href="${esc(url)}" target="_blank" rel="noopener" aria-label="${esc(site.name)} on ${b.title}">${svg}</a>`
+        : `<span class="${cls}" role="img" aria-label="${b.title} (link coming soon)" title="${b.title}">${svg}</span>`;
+    })
+    .join('');
+}
+function topbar() {
+  return `<div class="topbar">
+  <div class="container topbar-inner">
+    <p class="topbar-text">${icon('pin')}<span class="long">${esc(site.topbarText)}</span><span class="short">${esc(site.topbarTextShort || site.topbarText)}</span></p>
+    <div class="topbar-social">${socialIcons('topbar-icon')}</div>
+  </div>
+</div>`;
+}
+
 const LOGO = `<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="16" fill="#406093"/><path d="M36 10 L 16 37 H 30 L 26 54 L 48 26 H 34 Z" fill="#93d16b"/><path d="M16 50 C 22 44 30 44 36 50" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
 const brand = () =>
   `<a class="brand" href="/" aria-label="${esc(site.name)} — home">${LOGO}<span class="brand-text"><strong>Justice Energy</strong><span>Co.</span></span></a>`;
@@ -210,6 +233,7 @@ function header(page) {
     )
     .join('');
   return `<a class="skip-link" href="#main">Skip to content</a>
+${topbar()}
 <header class="site-header" data-header>
   <div class="container header-inner">
     ${brand()}
@@ -240,10 +264,7 @@ function header(page) {
 }
 
 function footer() {
-  const social = Object.entries(site.social)
-    .filter(([, url]) => url)
-    .map(([k, url]) => `<a href="${esc(url)}" rel="noopener" target="_blank" aria-label="${esc(site.name)} on ${k[0].toUpperCase() + k.slice(1)}">${icon(k)}</a>`)
-    .join('');
+  const social = socialIcons('footer-icon');
   const addr = [site.address.street, site.address.city && `${site.address.city}, ${site.address.region} ${site.address.postalCode}`.trim()]
     .filter(Boolean)
     .join('<br>');

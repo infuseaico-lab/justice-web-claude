@@ -19,6 +19,8 @@
     if (!toggle || !nav) return;
     toggle.setAttribute('aria-expanded', String(open));
     toggle.querySelector('.sr-only').textContent = open ? 'Close menu' : 'Open menu';
+    // Open the drawer right under the header, which sits lower while the top bar is in view.
+    if (open && header) nav.style.top = Math.max(0, header.getBoundingClientRect().bottom) + 'px';
     nav.classList.toggle('is-open', open);
     document.body.classList.toggle('nav-open', open);
   }

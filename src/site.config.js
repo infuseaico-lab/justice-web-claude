@@ -33,12 +33,15 @@ module.exports = {
   // schema.org openingHours format; set to [] to omit.
   openingHours: ['Mo-Fr 08:30-17:00'],
   license: '', // TODO: e.g. 'CSLB #1234567' — shown in the footer when set
+  // Shown in the top bar above the header.
+  topbarText: 'Serving Los Angeles and Orange Counties',
+  topbarTextShort: 'Serving LA & Orange Counties',
   social: {
-    // TODO: add profile URLs; empty values are hidden.
+    // TODO: add the profile URLs. Icons show in the top bar and footer; they become links once a URL is set.
     facebook: '',
     instagram: '',
-    linkedin: '',
-    google: '',
+    yelp: '',
+    google: '', // Google Business Profile link
   },
 
   form: {
