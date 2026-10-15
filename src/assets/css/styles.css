@@ -501,7 +501,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .field-error:empty { display: none; }
 fieldset.field { border: 0; padding: 0; margin: 0; min-width: 0; }
 fieldset.field legend { padding: 0; margin-bottom: 8px; }
-.choice-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+.choice-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr)); }
 .choice { position: relative; display: flex; }
 .choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .choice span {
@@ -729,3 +729,9 @@ a, button, summary, label, [role='button'], input[type='checkbox'] { touch-actio
 @keyframes backdrop-out { to { opacity: 0; } }
 /* Pressed controls settle back instead of snapping. */
 .pill, .topbar-icon, .footer-icon, .lightbox button { transition: transform 160ms var(--ease), background-color 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease); }
+
+/* Page tops without a picture use the full width. */
+.page-hero--text .hero-grid { grid-template-columns: 1fr; }
+/* Short headings that must stay on one line shrink with the screen instead of wrapping. */
+.page-hero--one-line h1 { white-space: nowrap; font-size: min(clamp(2.2rem, 1.5rem + 3.2vw, 3.6rem), 7.4vw); }
+.contact-grid > * { min-width: 0; }

@@ -342,8 +342,8 @@ function ctas({ primary = { href: '/contact/', label: 'Request a consultation' }
   </div>`;
 }
 
-function pageHero({ crumbs, eyebrow, h1, lead, image, alt, cta, badge, points }) {
-  return `<section class="hero page-hero">
+function pageHero({ crumbs, eyebrow, h1, lead, image, alt, cta, badge, points, oneLine }) {
+  return `<section class="hero page-hero${image ? '' : ' page-hero--text'}${oneLine ? ' page-hero--one-line' : ''}">
   <div class="container">
     ${crumbs ? breadcrumbs(crumbs) : ''}
     <div class="hero-grid">
@@ -887,6 +887,7 @@ ${pageHero({
   crumbs,
   eyebrow: 'Contact',
   h1: 'Request a consultation',
+  oneLine: true,
   lead: `Tell us about your property and the upgrades you are considering. We will follow up to talk through options and next steps. Prefer to talk? Call <a href="tel:${site.phoneHref}">${esc(site.phone)}</a>.`,
   cta: false,
 })}

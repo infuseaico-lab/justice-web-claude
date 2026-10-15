@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/css/styles.css?v=f0aac852">
+<link rel="stylesheet" href="/assets/css/styles.css?v=ff8169a8">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://justiceenergyco.com/"},{"@type":"ListItem","position":2,"name":"Gallery","item":"https://justiceenergyco.com/gallery/"}]},{"@type":"CollectionPage","name":"Justice Energy Co. project gallery","url":"https://justiceenergyco.com/gallery/","about":{"@id":"https://justiceenergyco.com/#business"}}]}</script>
 
 </head>
@@ -71,7 +71,7 @@
 </header>
 <main id="main">
 
-<section class="hero page-hero">
+<section class="hero page-hero page-hero--text">
   <div class="container">
     <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><span aria-current="page">Gallery</span></li></ol></nav>
     <div class="hero-grid">
