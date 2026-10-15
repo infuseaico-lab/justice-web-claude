@@ -125,12 +125,15 @@ const SLOTS = [
 // A slot whose default ships as WebP (src/assets/slots/<slot>.webp) is served as WebP; others as JPG.
 const slotExt = (name) => (fs.existsSync(path.join(SRC, 'assets', 'slots', `${name}.webp`)) ? 'webp' : 'jpg');
 const PHOTO_ALT = Object.fromEntries(Object.entries(require('./src/content/photo-prompts').slots).map(([k, v]) => [k, v.alt]));
+// Optional crop focus for a slot's photo (CSS object-position), used where a frame is wider than 4:3.
+const PHOTO_FOCUS = Object.fromEntries(Object.entries(require('./src/content/photo-prompts').slots).map(([k, v]) => [k, v.focus]));
 function img(name, alt, { eager = false, sizes = '(min-width: 1024px) 50vw, 100vw' } = {}) {
   const loading = eager ? ' fetchpriority="high"' : ' loading="lazy"';
   const ext = slotExt(name);
   // Once a slot has a photo, describe the photo rather than the drawing it replaced.
   if (ext === 'webp' && PHOTO_ALT[name]) alt = PHOTO_ALT[name];
-  return `<img src="/img/slot/${name}.${ext}" srcset="/img/slot/${name}-800.${ext} 800w, /img/slot/${name}.${ext} 1600w" sizes="${sizes}" alt="${esc(alt)}" width="1600" height="1200"${loading} decoding="async">`;
+  const focus = ext === 'webp' && PHOTO_FOCUS[name] ? ` style="object-position: ${esc(PHOTO_FOCUS[name])}"` : '';
+  return `<img src="/img/slot/${name}.${ext}" srcset="/img/slot/${name}-800.${ext} 800w, /img/slot/${name}.${ext} 1600w" sizes="${sizes}" alt="${esc(alt)}" width="1600" height="1200"${focus}${loading} decoding="async">`;
 }
 const imgUrl = (name) => `/img/slot/${name}.${slotExt(name)}`;
 

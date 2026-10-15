@@ -1,7 +1,8 @@
 /*
  * Prompts for AI-generated photographs, one per photo slot, used by
  * scripts/generate-photos.mjs. `alt` describes the finished photo and replaces
- * the drawing's alt text once the slot has a photo.
+ * the drawing's alt text once the slot has a photo. `focus` (optional) is the CSS object-position
+ * used where a frame crops the 4:3 photo, such as the wider service cards.
  *
  * These are illustrative stock-style images: they must not be presented as
  * Justice Energy Co.'s own completed projects. Replace them with real project
@@ -28,8 +29,9 @@ module.exports = {
       alt: 'Newly installed heat pump water heater in a clean garage utility area',
     },
     hvac: {
-      prompt: 'Sleek white ductless mini-split indoor unit mounted high on the wall of a contemporary, design-forward living room: low-profile modular sofa, warm oak floor, minimalist decor, a large abstract artwork, a sculptural floor lamp, green plants, floor-to-ceiling windows with afternoon light. A relaxed adult sits on the sofa cushions, leaning back in the middle of the sofa (not on a bench or ottoman), pointing a small white remote control up at the mini-split and looking at the unit, which is mounted on the wall above and slightly to the side of the sofa. Cool air is clearly visible flowing out of the open louvers: soft white translucent streams of chilled mist fanning out and drifting down across the room toward the sofa, easy to see against the wall, like cold air made visible in a premium air-conditioner advertisement photo.',
-      alt: 'Homeowner on a sofa adjusting a ductless mini-split with a remote as cool air flows into a modern living room',
+      prompt: 'Sleek white ductless mini-split indoor unit mounted on a deep teal-green painted accent wall in an ultra-modern, vibrant, colorful designer living room, like a high-end interior design magazine shoot: a curved velvet sofa in rich mustard yellow with coral and cobalt-blue cushions, a bold patterned rug in terracotta, pink and blue, a round marble coffee table, a brass arc floor lamp, colorful contemporary art prints, lush green plants, polished light concrete floor, floor-to-ceiling black-framed windows with bright afternoon light. Saturated, cheerful color palette. The whole mini-split unit is fully in frame with clear wall space above it. A relaxed adult sits on the sofa cushions, leaning back in the middle of the sofa (not on a bench or ottoman), pointing a small white remote control up at the mini-split and looking at the unit, which is mounted on the wall above and slightly to the side of the sofa. Cool air is clearly visible flowing out of the open louvers: soft white translucent streams of chilled mist fanning out and drifting down across the room toward the sofa, easy to see against the wall, like cold air made visible in a premium air-conditioner advertisement photo.',
+      alt: 'Homeowner on a colorful sofa adjusting a ductless mini-split with a remote as cool air flows into a modern living room',
+      focus: 'center top', // keep the wall unit in view where the frame crops the photo
     },
     'water-conservation': {
       prompt: 'Bright modern bathroom with an efficient chrome showerhead in a glass-enclosed shower, a white vessel sink with a slim water-saving faucet, and a modern white low-flow toilet, light gray tile, natural light, spotless.',
