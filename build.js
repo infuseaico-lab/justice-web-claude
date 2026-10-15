@@ -124,9 +124,12 @@ const SLOTS = [
 ];
 // A slot whose default ships as WebP (src/assets/slots/<slot>.webp) is served as WebP; others as JPG.
 const slotExt = (name) => (fs.existsSync(path.join(SRC, 'assets', 'slots', `${name}.webp`)) ? 'webp' : 'jpg');
+const PHOTO_ALT = Object.fromEntries(Object.entries(require('./src/content/photo-prompts').slots).map(([k, v]) => [k, v.alt]));
 function img(name, alt, { eager = false, sizes = '(min-width: 1024px) 50vw, 100vw' } = {}) {
   const loading = eager ? ' fetchpriority="high"' : ' loading="lazy"';
   const ext = slotExt(name);
+  // Once a slot has a photo, describe the photo rather than the drawing it replaced.
+  if (ext === 'webp' && PHOTO_ALT[name]) alt = PHOTO_ALT[name];
   return `<img src="/img/slot/${name}.${ext}" srcset="/img/slot/${name}-800.${ext} 800w, /img/slot/${name}.${ext} 1600w" sizes="${sizes}" alt="${esc(alt)}" width="1600" height="1200"${loading} decoding="async">`;
 }
 const imgUrl = (name) => `/img/slot/${name}.${slotExt(name)}`;
@@ -305,7 +308,7 @@ function footer() {
     </div>
   </div>
   <div class="container">
-    <p class="footer-disclaimer">Program participation, incentive amounts, eligibility and funding availability are set by each program and are not guaranteed. Illustrations on this site are for explanation only and do not depict completed client projects.</p>
+    <p class="footer-disclaimer">Program participation, incentive amounts, eligibility and funding availability are set by each program and are not guaranteed. Images on this site are illustrative and do not depict completed client projects.</p>
     <div class="footer-bottom">
       <p>© ${YEAR} ${esc(site.name)} All rights reserved.${site.license ? ` ${esc(site.license)}` : ''}</p>
       <p><a href="/privacy-policy/">Privacy policy</a> · <a href="/sitemap.xml" target="_blank" rel="noopener">Sitemap</a></p>

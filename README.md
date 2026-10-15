@@ -110,6 +110,21 @@ When testing locally, the admin creates `dist/uploads/` and `dist/admin/data/`. 
 
 Search rankings and specific speed scores are not guaranteed.
 
+## AI-generated photos
+
+`scripts/generate-photos.mjs` creates a photo-realistic image for each photo slot from the prompts in `src/content/photo-prompts.js`, then installs it as that slot's default: `<slot>.webp` (1600 × 1200) and `<slot>-800.webp` (800 × 600) in `src/assets/slots/`, plus JPG copies.
+
+```bash
+export OPENAI_API_KEY=...          # or FAL_KEY, GEMINI_API_KEY, MAX_API_KEY
+node scripts/generate-photos.mjs --dry-run                 # see the prompts
+node scripts/generate-photos.mjs                           # every slot without a photo yet
+node scripts/generate-photos.mjs --slots hvac,about --force # regenerate chosen slots
+node scripts/generate-photos.mjs --use hero-home=photo.jpg # install your own photo instead
+node scripts/raster.js && node build.js                    # refresh share images, rebuild
+```
+
+The first key found picks the service (or pass `--provider openai|fal|gemini|maxgent`, and `--model` to change the model). Slots that already have a photo, such as `turf-replacement`, are skipped unless you pass `--force`. Once a slot has a photo, its alt text comes from `photo-prompts.js`. AI images are illustrative: do not present them as the client's completed projects, and replace them with real project photos when available.
+
 ## Images
 
 The default page images are original drawings (`scripts/illustrations.js`), rendered to JPG. They explain each service and are not presented as client projects. Replace them with real photos in the admin.
