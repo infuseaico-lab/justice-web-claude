@@ -251,7 +251,7 @@ ${topbar()}
       </ul>
       <div class="nav-mobile-cta">
         <a class="btn btn-primary btn-lg" href="/contact/">Request a consultation</a>
-        <a class="btn btn-outline btn-lg" href="tel:${site.phoneHref}">${icon('phone')} Call ${esc(site.phone)}</a>
+        <a class="btn btn-call btn-lg" href="tel:${site.phoneHref}">${icon('phone')} Call ${esc(site.phone)}</a>
       </div>
     </nav>
     <div class="header-actions">
@@ -309,7 +309,7 @@ function footer() {
   </div>
 </footer>
 <div class="action-bar" aria-label="Quick actions">
-  <a class="btn btn-outline" href="tel:${site.phoneHref}">${icon('phone')} Call</a>
+  <a class="btn btn-call" href="tel:${site.phoneHref}">${icon('phone')} Call</a>
   <a class="btn btn-primary" href="/contact/">Get a consultation</a>
 </div>
 <script src="/assets/js/main.js?v=${JS_V}" defer></script>`;
@@ -338,7 +338,7 @@ function breadcrumbs(crumbs) {
 function ctas({ primary = { href: '/contact/', label: 'Request a consultation' }, phone = true } = {}) {
   return `<div class="btn-row">
     <a class="btn btn-primary btn-lg" href="${primary.href}">${esc(primary.label)} ${icon('arrow')}</a>
-    ${phone ? `<a class="btn btn-outline btn-lg" href="tel:${site.phoneHref}">${icon('phone')} ${esc(site.phone)}</a>` : ''}
+    ${phone ? `<a class="btn btn-call btn-lg" href="tel:${site.phoneHref}">${icon('phone')} ${esc(site.phone)}</a>` : ''}
   </div>`;
 }
 
@@ -422,7 +422,7 @@ function ctaBand({ title = 'Ready to plan your upgrade?', text, image = 'contact
         <p>${text || 'Tell us about your property and the upgrades you have in mind. We will follow up to talk through options, next steps and programs that may apply.'}</p>
         <div class="btn-row">
           <a class="btn btn-accent btn-lg" href="${(primary && primary.href) || '/contact/'}">${esc((primary && primary.label) || 'Request a consultation')} ${icon('arrow')}</a>
-          <a class="btn btn-ghost-light btn-lg" href="tel:${site.phoneHref}">${icon('phone')} ${esc(site.phone)}</a>
+          <a class="btn btn-call btn-lg" href="tel:${site.phoneHref}">${icon('phone')} ${esc(site.phone)}</a>
         </div>
       </div>
       <div class="cta-media">${img(image, alt)}</div>

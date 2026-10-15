@@ -666,3 +666,8 @@ a.footer-icon:hover { background: #f6b941; color: #16243b; }
 }
 /* A backdrop filter would trap the fixed menu drawer inside the header; drop it while the menu is open. */
 body.nav-open .site-header { -webkit-backdrop-filter: none; backdrop-filter: none; background: #fff; }
+
+/* Phone call buttons: amber, matching the top bar. */
+.btn-call { background: #f6b941; color: #16243b; border-color: transparent; box-shadow: 0 8px 20px rgba(246, 185, 65, 0.3); }
+.btn-call:hover { background: #eaa92a; color: #16243b; }
+.btn-call svg { color: #16243b; }
