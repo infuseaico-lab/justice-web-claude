@@ -15,6 +15,10 @@ const SKIP = new Set(['.htaccess', '_headers', '_redirects', 'slots.json']);
 
 const BANNER = `<div role="note" style="background:#16243b;color:#ffffff;font:600 14px/1.4 Inter,system-ui,sans-serif;text-align:center;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))">Design preview prepared by Infuse AI for Justice Energy Co. Not the live website: the form does not send.</div>`;
 
+// The preview viewer keeps the scroll position when moving between pages; start each page at the top
+// unless the link points at a section (#anchor) or the visitor has already started scrolling.
+const TOP = `<script>(function(){if(location.hash)return;try{history.scrollRestoration='manual'}catch(e){}var moved=false;['wheel','touchstart','keydown','mousedown'].forEach(function(t){addEventListener(t,function(){moved=true},{once:true,passive:true})});function top(){if(!moved)window.scrollTo(0,0)}top();addEventListener('DOMContentLoaded',top);addEventListener('load',function(){top();setTimeout(top,60);setTimeout(top,250);setTimeout(top,700)});addEventListener('pageshow',top)})();</script>`;
+
 function walk(dir, base = '') {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
     const rel = base ? `${base}/${e.name}` : e.name;
@@ -38,7 +42,8 @@ function rewrite(html, rel) {
     .replace(/srcset="([^"]*)"/g, (_, set) => `srcset="${set.replace(/\/(img\/slot\/[^\s,]+)/g, (__, u) => mapUrl(u, depth))}"`)
     .replace(/<meta name="robots" content="[^"]*">/, '<meta name="robots" content="noindex, nofollow">')
     .replace(/ data-netlify="true" netlify-honeypot="bot-field"/, ' data-demo')
-    .replace('<body>', `<body>\n${BANNER}`);
+    .replace('<body>', `<body>\n${BANNER}`)
+    .replace('</head>', `${TOP}\n</head>`);
 }
 
 fs.rmSync(OUT, { recursive: true, force: true });

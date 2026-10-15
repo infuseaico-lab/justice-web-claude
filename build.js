@@ -250,13 +250,13 @@ ${topbar()}
         <li><a href="/contact/"${cur('/contact/')}>Contact</a></li>
       </ul>
       <div class="nav-mobile-cta">
-        <a class="btn btn-primary btn-lg" href="/contact/">Request a consultation</a>
+        <a class="btn btn-accent btn-lg" href="/contact/">Request a consultation</a>
         <a class="btn btn-call btn-lg" href="tel:${site.phoneHref}">${icon('phone')} Call ${esc(site.phone)}</a>
       </div>
     </nav>
     <div class="header-actions">
       <a class="header-phone" href="tel:${site.phoneHref}" aria-label="Call ${esc(site.phone)}">${icon('phone')}<span>${esc(site.phone)}</span></a>
-      <a class="btn btn-primary btn-sm" href="/contact/">Request a consultation</a>
+      <a class="btn btn-accent btn-sm" href="/contact/">Request a consultation</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="bars"></span><span class="sr-only">Open menu</span></button>
     </div>
   </div>
@@ -310,7 +310,7 @@ function footer() {
 </footer>
 <div class="action-bar" aria-label="Quick actions">
   <a class="btn btn-call" href="tel:${site.phoneHref}">${icon('phone')} Call</a>
-  <a class="btn btn-primary" href="/contact/">Get a consultation</a>
+  <a class="btn btn-accent" href="/contact/">Get a consultation</a>
 </div>
 <script src="/assets/js/main.js?v=${JS_V}" defer></script>`;
 }
@@ -337,7 +337,7 @@ function breadcrumbs(crumbs) {
 
 function ctas({ primary = { href: '/contact/', label: 'Request a consultation' }, phone = true } = {}) {
   return `<div class="btn-row">
-    <a class="btn btn-primary btn-lg" href="${primary.href}">${esc(primary.label)} ${icon('arrow')}</a>
+    <a class="btn ${/consultation/i.test(primary.label) ? 'btn-accent' : 'btn-primary'} btn-lg" href="${primary.href}">${esc(primary.label)} ${icon('arrow')}</a>
     ${phone ? `<a class="btn btn-call btn-lg" href="tel:${site.phoneHref}">${icon('phone')} ${esc(site.phone)}</a>` : ''}
   </div>`;
 }
@@ -960,7 +960,7 @@ ${pageHero({
           </div>
         </div>
         <div class="form-actions">
-          <button class="btn btn-primary btn-lg" type="submit">Request my consultation ${icon('arrow')}</button>
+          <button class="btn btn-accent btn-lg" type="submit">Request my consultation ${icon('arrow')}</button>
           <p class="muted small" style="margin:0">Your details are used only to respond to your request.</p>
         </div>
         <div class="form-status" aria-live="polite"></div>
@@ -1106,7 +1106,7 @@ addPage(
   const empty = `<div class="gallery-empty">
       <h2>Project photos are on the way</h2>
       <p>We are adding photos of recent upgrades. In the meantime, explore our services or request a consultation to talk about your home.</p>
-      <div class="btn-row" style="justify-content:center"><a class="btn btn-primary" href="/services/">Explore services ${icon('arrow')}</a><a class="btn btn-outline" href="/contact/">Request a consultation</a></div>
+      <div class="btn-row" style="justify-content:center"><a class="btn btn-primary" href="/services/">Explore services ${icon('arrow')}</a><a class="btn btn-accent" href="/contact/">Request a consultation</a></div>
     </div>`;
   const body = `
 ${pageHero({
