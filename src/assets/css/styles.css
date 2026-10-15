@@ -735,3 +735,21 @@ a, button, summary, label, [role='button'], input[type='checkbox'] { touch-actio
 /* Short headings that must stay on one line shrink with the screen instead of wrapping. */
 .page-hero--one-line h1 { white-space: nowrap; font-size: min(clamp(2.2rem, 1.5rem + 3.2vw, 3.6rem), 7.4vw); }
 .contact-grid > * { min-width: 0; }
+
+/* ---------- Testimonials ---------- */
+.testimonials { display: grid; gap: 20px; }
+@media (min-width: 900px) { .testimonials { grid-template-columns: repeat(3, 1fr); } }
+.testimonial {
+  display: flex; flex-direction: column; margin: 0; padding: clamp(24px, 3vw, 32px);
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
+}
+.testimonial-mark { display: block; height: 0.55em; margin-bottom: 18px; font: 700 5rem/1 Georgia, 'Times New Roman', serif; color: var(--amber-500); }
+.testimonial blockquote { flex: 1; margin: 0 0 24px; }
+.testimonial blockquote p { margin: 0; color: var(--ink); font-size: 1.0625rem; line-height: 1.6; }
+.testimonial figcaption { display: flex; align-items: center; gap: 14px; }
+.testimonial-avatar {
+  display: grid; place-items: center; flex: none; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--teal-100); color: var(--teal-700); font-family: var(--font-head); font-weight: 800; font-size: 1rem;
+}
+.testimonial-who strong { display: block; color: var(--ink); font-family: var(--font-head); font-size: 1.05rem; }
+.testimonial-who span { display: block; color: var(--muted); font-size: 0.9rem; }

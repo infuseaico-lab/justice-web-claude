@@ -16,6 +16,7 @@ const DIST = path.join(ROOT, 'dist');
 const site = require('./src/site.config');
 const services = require('./src/content/services');
 const programs = require('./src/content/programs');
+const testimonials = require('./src/content/testimonials');
 
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 const YEAR = new Date().getFullYear();
@@ -415,6 +416,24 @@ function faqBlock(faqs, center = false) {
     .join('')}</div>`;
 }
 
+function testimonialsSection() {
+  const initials = (name) => name.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+  return `<section class="section section--tint" aria-labelledby="reviews-title">
+  <div class="container">
+    ${sectionHead({ eyebrow: 'Testimonials', title: '<span id="reviews-title">What our customers say</span>', center: true })}
+    <div class="testimonials">${testimonials
+      .map(
+        (t) => `<figure class="testimonial" data-reveal>
+        <span class="testimonial-mark" aria-hidden="true">&rdquo;</span>
+        <blockquote><p>${esc(t.quote)}</p></blockquote>
+        <figcaption><span class="testimonial-avatar" aria-hidden="true">${esc(initials(t.name))}</span><span class="testimonial-who"><strong>${esc(t.name)}</strong><span>${esc(t.location)}</span></span></figcaption>
+      </figure>`
+      )
+      .join('')}</div>
+  </div>
+</section>`;
+}
+
 function ctaBand({ title = 'Ready to plan your upgrade?', text, image = 'contact', alt = 'Illustration of a map pin, a phone card and a calendar for scheduling a consultation', primary } = {}) {
   return `<section class="cta-band" aria-labelledby="cta-title">
   <div class="container">
@@ -538,6 +557,8 @@ const VALUES = [
     </div>
   </div>
 </section>
+
+${testimonialsSection()}
 
 <section class="section" aria-labelledby="faq-title">
   <div class="container">
