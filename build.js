@@ -423,6 +423,34 @@ function faqBlock(faqs, center = false) {
     .join('')}</div>`;
 }
 
+// Trust bar under the home page hero: confirmed figures first, then facts the site already states, up to five.
+function trustBar() {
+  const t = site.trust || {};
+  const items = [
+    t.googleRating && { value: `${t.googleRating}<span class="trust-star" aria-hidden="true">★</span>`, label: 'Google rating', sr: `${t.googleRating} out of 5` },
+    t.googleReviews && { value: esc(t.googleReviews), label: 'Google reviews' },
+    site.license && { value: 'Licensed', label: esc(site.license) },
+    site.address.city && { value: 'Local office', label: `in ${esc(site.address.city)}` },
+    t.yearFounded && { value: `Since ${esc(t.yearFounded)}`, label: `in ${esc(site.serviceArea)}` },
+    { value: `${programs.length} programs`, label: 'we work with' },
+    { value: 'LA &amp; Orange', label: 'Counties served' },
+  ]
+    .filter(Boolean)
+    .slice(0, 5);
+  const stars = t.googleRating
+    ? `<p class="trust-stars">${site.social.google ? `<a href="${esc(site.social.google)}" target="_blank" rel="noopener">` : ''}<span aria-hidden="true">★★★★★</span><span class="sr-only">Rated ${esc(t.googleRating)} out of 5 on Google</span>${site.social.google ? '</a>' : ''}</p>`
+    : '';
+  return `<section class="trust" aria-labelledby="trust-title">
+  <div class="container" data-reveal>
+    <h2 class="trust-title" id="trust-title">Trusted by homeowners across ${esc(site.serviceArea)}</h2>
+    <ul class="trust-items">${items
+      .map((i) => `<li><strong>${i.sr ? `<span aria-hidden="true">${i.value}</span><span class="sr-only">${esc(i.sr)}</span>` : i.value}</strong><span>${i.label}</span></li>`)
+      .join('')}</ul>
+    ${stars}
+  </div>
+</section>`;
+}
+
 function testimonialsSection() {
   const initials = (name) => name.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
   return `<section class="section section--tint" aria-labelledby="reviews-title">
@@ -520,6 +548,8 @@ const VALUES = [
 <section class="section--tight" aria-label="Why homeowners choose us">
   <div class="container"><div class="values values--overlap">${VALUES.map((v) => `<div class="value" data-reveal>${ico(v.icon)}<div><h3>${esc(v.title)}</h3><p>${esc(v.text)}</p></div></div>`).join('')}</div></div>
 </section>
+
+${trustBar()}
 
 <section class="section" aria-labelledby="services-title">
   <div class="container">

@@ -33,6 +33,13 @@ module.exports = {
   // schema.org openingHours format; set to [] to omit.
   openingHours: ['Mo-Fr 08:30-17:00'],
   license: '', // TODO: e.g. 'CSLB #1234567' — shown in the footer when set
+  // Trust bar under the home page hero. Fill in only figures the client has confirmed; an empty
+  // value hides its item, and the stars show only once a rating is set. A set `license` adds "Licensed".
+  trust: {
+    googleRating: '', // TODO: e.g. '4.9'
+    googleReviews: '', // TODO: e.g. '127'
+    yearFounded: '', // TODO: e.g. '2014'
+  },
   // Shown in the top bar above the header.
   topbarText: 'Serving Los Angeles and Orange Counties',
   topbarTextShort: 'Serving LA & Orange Counties',
