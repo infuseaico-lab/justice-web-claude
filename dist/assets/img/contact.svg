@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900"><defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#d9eff3"/><stop offset="0.65" stop-color="#eef7f6"/><stop offset="1" stop-color="#fbf6ea"/>
+  </linearGradient>
+  <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0f2a3f"/><stop offset="1" stop-color="#1d4766"/>
+  </linearGradient>
+  <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#f6b941" stop-opacity="0.55"/><stop offset="1" stop-color="#f6b941" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="lampGlow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#ffe7a8" stop-opacity="0.85"/><stop offset="1" stop-color="#ffe7a8" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="warmGlass" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#fff1c7"/><stop offset="1" stop-color="#ffd06a"/>
+  </linearGradient>
+  <linearGradient id="coolGlass" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#e9f7fb"/><stop offset="1" stop-color="#b9e0ea"/>
+  </linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#e7edf1"/><stop offset="0.5" stop-color="#ffffff"/><stop offset="1" stop-color="#d6e0e7"/>
+  </linearGradient>
+  <linearGradient id="cone" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffe7a8" stop-opacity="0.75"/><stop offset="1" stop-color="#ffe7a8" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+    <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#0f2a3f" flood-opacity="0.14"/>
+  </filter>
+  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="160%">
+    <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0f2a3f" flood-opacity="0.12"/>
+  </filter></defs><rect width="1200" height="900" fill="#eef4f2"/><path d="M0 640 C 220 560, 420 700, 640 610 S 1000 520, 1200 600 V 900 H 0 Z" fill="#cfe6f2"/><g fill="#e3efe7"><rect x="60" y="60" width="260" height="180" rx="18"/><rect x="360" y="40" width="220" height="220" rx="18"/><rect x="640" y="80" width="260" height="160" rx="18"/><rect x="940" y="50" width="220" height="200" rx="18"/><rect x="80" y="300" width="200" height="200" rx="18"/><rect x="330" y="320" width="280" height="180" rx="18"/><rect x="680" y="300" width="200" height="180" rx="18"/><rect x="940" y="300" width="220" height="200" rx="18"/></g><path d="M0 270 H 1200 M 320 0 V 600 M 620 0 V 560 M 910 0 V 560 M 0 520 C 300 500, 700 560, 1200 470" stroke="#fff" stroke-width="22" fill="none"/><path d="M0 270 H 1200 M 320 0 V 600" stroke="#ffe3a1" stroke-width="6" fill="none" stroke-dasharray="20 18"/><ellipse cx="620" cy="560" rx="70" ry="18" fill="#0f2a3f" opacity="0.15"/><g filter="url(#shadow)"><path d="M620 560 C 560 470, 520 430, 520 370 A 100 100 0 0 1 720 370 C 720 430, 680 470, 620 560 Z" fill="#0e9384"/></g><circle cx="620" cy="370" r="42" fill="#fff"/><path d="M626 340 L 604 376 H 620 L 614 402 L 638 364 H 621 Z" fill="#f6b941"/><g filter="url(#shadow)"><rect x="80" y="620" width="400" height="200" rx="28" fill="#fff"/></g><circle cx="160" cy="720" r="44" fill="#dff4ef"/><path d="M142 700 C 142 696 146 692 150 692 L 158 692 L 164 708 L 156 714 C 160 724 166 730 176 734 L 182 726 L 198 732 L 198 740 C 198 744 194 748 190 748 C 162 746 144 728 142 700 Z" fill="#0e9384"/><rect x="226" y="690" width="200" height="18" rx="9" fill="#0f2a3f"/><rect x="226" y="724" width="150" height="12" rx="6" fill="#dfe8ee"/><g filter="url(#shadow)"><rect x="760" y="600" width="360" height="240" rx="28" fill="#fff"/></g><rect x="760" y="600" width="360" height="64" rx="28" fill="#0f2a3f"/><rect x="760" y="636" width="360" height="28" fill="#0f2a3f"/><rect x="796" y="690" width="44" height="44" rx="10" fill="#eef3f6"/><rect x="858" y="690" width="44" height="44" rx="10" fill="#eef3f6"/><rect x="920" y="690" width="44" height="44" rx="10" fill="#eef3f6"/><rect x="982" y="690" width="44" height="44" rx="10" fill="#eef3f6"/><rect x="1044" y="690" width="44" height="44" rx="10" fill="#eef3f6"/><rect x="796" y="752" width="44" height="44" rx="10" fill="#eef3f6"/><rect x="858" y="752" width="44" height="44" rx="10" fill="#f6b941"/><rect x="920" y="752" width="44" height="44" rx="10" fill="#eef3f6"/><rect x="982" y="752" width="44" height="44" rx="10" fill="#eef3f6"/><rect x="1044" y="752" width="44" height="44" rx="10" fill="#eef3f6"/><g filter="url(#softShadow)"><rect x="780" y="120" width="298" height="58" rx="29" fill="#fff"/></g>
+    <circle cx="810" cy="149" r="19" fill="#0e9384"/><path d="M802 150 L 808 156 L 819 143" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="840" y="156" font-family="Inter, 'Segoe UI', Roboto, Arial, sans-serif" font-size="20" font-weight="700" fill="#0f2a3f">Book a consultation</text></svg>

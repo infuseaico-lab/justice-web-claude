@@ -1,0 +1,17 @@
+# Netlify / Cloudflare Pages redirects.
+# Add 301 redirects from the old justiceenergyco.com URLs here during content migration, e.g.:
+# /old-page            /new-page/          301
+/home                  /                   301
+/index.html            /                   301
+/contact-us            /contact/           301
+/contact-us/           /contact/           301
+/about-us              /about/             301
+/about-us/             /about/             301
+/privacy               /privacy-policy/    301
+/privacy/              /privacy-policy/    301
+/hvac                  /services/hvac-heat-pumps/        301
+/heat-pumps            /services/hvac-heat-pumps/        301
+/water-heaters         /services/water-heating/          301
+/led-lighting          /services/led-lighting-retrofits/ 301
+/turf-replacement      /services/turf-replacement/       301
+/water-conservation    /services/water-conservation/     301
