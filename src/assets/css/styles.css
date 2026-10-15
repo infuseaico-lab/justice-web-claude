@@ -39,7 +39,7 @@
   --header-h: 72px;
   --font-head: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --font-body: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 /* ---------- Base ---------- */
@@ -168,13 +168,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
   display: inline-grid; place-items: center; width: 30px; height: 30px; margin-left: -10px;
   border: 0; background: none; border-radius: 50%; cursor: pointer; color: var(--ink);
 }
-.sub-toggle svg { width: 16px; height: 16px; transition: transform 0.2s; }
+.sub-toggle svg { width: 16px; height: 16px; transition: transform 200ms var(--ease); }
 .sub {
   position: absolute; top: calc(100% + 10px); left: -16px; width: 380px;
   list-style: none; margin: 0; padding: 10px;
   background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
-  opacity: 0; visibility: hidden; transform: translateY(6px);
-  transition: opacity 0.18s, transform 0.18s, visibility 0.18s;
+  opacity: 0; visibility: hidden; transform: translateY(4px) scale(0.97); transform-origin: 32px 0;
+  transition: opacity 180ms var(--ease), transform 180ms var(--ease), visibility 180ms;
 }
 .sub::before { content: ''; position: absolute; inset: -12px 0 auto; height: 12px; }
 .has-sub:focus-within .sub, .has-sub.is-open .sub { opacity: 1; visibility: visible; transform: none; }
@@ -202,7 +202,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   background: #fff; cursor: pointer; place-items: center;
 }
 .menu-toggle .bars, .menu-toggle .bars::before, .menu-toggle .bars::after {
-  display: block; width: 20px; height: 2px; border-radius: 2px; background: var(--ink); transition: transform 0.2s, opacity 0.2s;
+  display: block; width: 20px; height: 2px; border-radius: 2px; background: var(--ink); transition: transform 200ms var(--ease), opacity 200ms var(--ease);
 }
 .menu-toggle .bars { position: relative; }
 .menu-toggle .bars::before, .menu-toggle .bars::after { content: ''; position: absolute; left: 0; }
@@ -224,7 +224,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
     margin: 0; padding: 16px var(--gutter) calc(32px + env(safe-area-inset-bottom));
     background: #fff; overflow-y: auto; overscroll-behavior: contain;
     opacity: 0; visibility: hidden; transform: translateY(-8px);
-    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    transition: opacity 160ms var(--ease), transform 160ms var(--ease), visibility 160ms;
   }
   .nav.is-open { opacity: 1; visibility: visible; transform: none; }
   .nav-list { flex-direction: column; align-items: stretch; gap: 0; }
@@ -507,11 +507,11 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
 .choice span {
   display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 14px;
   background: var(--surface-2); border: 1.5px solid #d3dcea; border-radius: 12px;
-  color: var(--ink); font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: all 0.15s;
+  color: var(--ink); font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: background-color 150ms var(--ease), border-color 150ms var(--ease), transform 150ms var(--ease);
 }
 .choice span::before {
   content: ''; flex: none; width: 20px; height: 20px; border-radius: 6px; border: 2px solid #b5c3d8; background: #fff;
-  transition: all 0.15s;
+  transition: background-color 150ms var(--ease), border-color 150ms var(--ease);
 }
 .choice input:checked + span { background: var(--teal-50); border-color: var(--teal-600); }
 .choice input:checked + span::before {
@@ -591,7 +591,7 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
 
 /* ---------- Reveal on scroll ---------- */
 @media (prefers-reduced-motion: no-preference) {
-  .js [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+  .js [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 500ms var(--ease), transform 500ms var(--ease); }
   .js [data-reveal].is-visible { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -700,3 +700,32 @@ a, button, summary, label, [role='button'], input[type='checkbox'] { touch-actio
   padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
   padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
 }
+
+/* ---------- Motion polish ---------- */
+/* Phone menu: open with ease-out, close faster than it opens. */
+@media (max-width: 1023px) {
+  .nav.is-open { transition-duration: 240ms; }
+}
+/* Grids reveal as a short cascade rather than all at once. */
+@media (prefers-reduced-motion: no-preference) {
+  .cards > [data-reveal]:nth-child(2), .steps > [data-reveal]:nth-child(2), .values > [data-reveal]:nth-child(2) { transition-delay: 60ms; }
+  .cards > [data-reveal]:nth-child(3), .steps > [data-reveal]:nth-child(3), .values > [data-reveal]:nth-child(3) { transition-delay: 120ms; }
+  .cards > [data-reveal]:nth-child(4), .steps > [data-reveal]:nth-child(4), .values > [data-reveal]:nth-child(4) { transition-delay: 180ms; }
+  .cards > [data-reveal]:nth-child(n+5) { transition-delay: 240ms; }
+  /* FAQ answers ease in instead of popping open. */
+  .faq details[open] .faq-a { animation: faq-in 200ms var(--ease); }
+  /* Lightbox: fade and scale in from almost full size; leave quickly. */
+  .lightbox[open] { animation: lightbox-in 220ms var(--ease); }
+  .lightbox[open]::backdrop { animation: backdrop-in 220ms var(--ease); }
+  .lightbox.is-closing { animation: lightbox-out 150ms var(--ease) forwards; }
+  .lightbox.is-closing::backdrop { animation: backdrop-out 150ms var(--ease) forwards; }
+  .lightbox img { transition: opacity 180ms var(--ease); }
+  .lightbox img.is-loading { opacity: 0; }
+}
+@keyframes faq-in { from { opacity: 0; transform: translateY(-4px); } }
+@keyframes lightbox-in { from { opacity: 0; transform: scale(0.96); } }
+@keyframes lightbox-out { to { opacity: 0; transform: scale(0.98); } }
+@keyframes backdrop-in { from { opacity: 0; } }
+@keyframes backdrop-out { to { opacity: 0; } }
+/* Pressed controls settle back instead of snapping. */
+.pill, .topbar-icon, .footer-icon, .lightbox button { transition: transform 160ms var(--ease), background-color 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease); }

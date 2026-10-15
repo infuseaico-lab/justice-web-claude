@@ -88,6 +88,9 @@
         if (!links.length) return;
         current = (i + links.length) % links.length;
         var a = links[current];
+        // Fade the new photo in once it has loaded, instead of flashing the old one.
+        boxImg.classList.add('is-loading');
+        boxImg.onload = function () { boxImg.classList.remove('is-loading'); };
         boxImg.src = a.getAttribute('href');
         boxImg.alt = a.getAttribute('data-alt') || '';
         boxCap.textContent = a.getAttribute('data-caption') || '';
@@ -100,10 +103,19 @@
         show(visible().indexOf(a));
         box.showModal();
       });
-      box.querySelector('[data-close]').addEventListener('click', function () { box.close(); });
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      // Play a short exit before closing; the native close would remove it instantly.
+      var closeBox = function () {
+        if (!box.open || box.classList.contains('is-closing')) return;
+        if (reduceMotion.matches) { box.close(); return; }
+        box.classList.add('is-closing');
+        setTimeout(function () { box.classList.remove('is-closing'); box.close(); }, 150);
+      };
+      box.addEventListener('cancel', function (e) { e.preventDefault(); closeBox(); });
+      box.querySelector('[data-close]').addEventListener('click', closeBox);
       box.querySelector('[data-prev]').addEventListener('click', function () { show(current - 1); });
       box.querySelector('[data-next]').addEventListener('click', function () { show(current + 1); });
-      box.addEventListener('click', function (e) { if (e.target === box) box.close(); });
+      box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
       box.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowLeft') show(current - 1);
         if (e.key === 'ArrowRight') show(current + 1);
