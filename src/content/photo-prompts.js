@@ -49,7 +49,7 @@ module.exports = {
     },
     about: {
       prompt: 'Friendly energy-efficiency technician in a navy polo holding a tablet, talking with a smiling homeowner on the front walkway of a California home, warm late-afternoon light, natural candid moment, people not looking at the camera.',
-      alt: 'Energy-efficiency technician talking with a homeowner outside a California home',
+      alt: 'Technician in a navy work shirt shaking hands with a smiling homeowner in front of a house',
     },
     contact: {
       prompt: 'Smiling customer-service representative wearing a light headset at a bright, tidy office desk, talking on a call while taking notes, laptop open, plants and natural light in the background, candid.',
