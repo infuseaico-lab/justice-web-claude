@@ -237,6 +237,10 @@ function je_save_cover($src, string $dest, int $w, int $h): void
     imagecopyresampled($out, $src, 0, 0, (int) (($sw - $cw) / 2), (int) (($sh - $ch) / 2), $w, $h, $cw, $ch);
     imageinterlace($out, true);
     imagejpeg($out, $dest, 82);
+    // A WebP copy too, for slots whose page links ask for .webp (smaller files, same picture).
+    if (function_exists('imagewebp')) {
+        imagewebp($out, preg_replace('/\.jpg$/', '.webp', $dest), 80);
+    }
     imagedestroy($out);
 }
 

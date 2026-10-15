@@ -35,6 +35,11 @@ const cards = [
 ];
 
 const svgData = (name) => `data:image/svg+xml;base64,${fs.readFileSync(path.join(IMG, `${name}.svg`)).toString('base64')}`;
+// Social cards use a slot's real photo when one has been supplied, otherwise its drawing.
+const cardImage = (name) => {
+  const photo = path.join(ROOT, 'src/assets/slots', `${name}.webp`);
+  return fs.existsSync(photo) ? `data:image/webp;base64,${fs.readFileSync(photo).toString('base64')}` : svgData(name);
+};
 const logo = fs.readFileSync(path.join(IMG, 'favicon.svg'), 'utf8');
 
 function cardHtml(c) {
@@ -48,7 +53,7 @@ function cardHtml(c) {
   .eyebrow{margin-top:auto;color:#93d16b;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:18px}
   h1{color:#fff;font-size:${c.title.length > 40 ? 46 : 56}px;line-height:1.08;margin:14px 0 22px;letter-spacing:-.02em}
   .url{font-size:20px;color:#9fb4c4}
-  .img{background:url('${svgData(c.image)}') center/cover no-repeat}
+  .img{background:url('${cardImage(c.image)}') center/cover no-repeat}
   </style></head><body><div class="wrap"><div class="text">
   <div class="brand">${logo.replace('<svg ', '<svg ')}<div>Justice Energy<small>CO.</small></div></div>
   <div class="eyebrow">${c.eyebrow}</div><h1>${c.title.replace(/&/g, '&amp;')}</h1>
@@ -79,6 +84,12 @@ function cardHtml(c) {
   for (const id of SLOT_IDS) {
     const big = path.join(SLOTS_DIR, `${id}.jpg`);
     const small = path.join(SLOTS_DIR, `${id}-800.jpg`);
+    if (fs.existsSync(path.join(SLOTS_DIR, `${id}.webp`))) {
+      // A real photo was supplied as WebP: keep it and derive the JPG copies from it.
+      execFileSync('convert', [path.join(SLOTS_DIR, `${id}.webp`), '-strip', '-interlace', 'Plane', '-quality', '82', big]);
+      execFileSync('convert', [path.join(SLOTS_DIR, `${id}-800.webp`), '-strip', '-interlace', 'Plane', '-quality', '80', small]);
+      continue;
+    }
     if (fs.existsSync(path.join(PHOTOS, `${id}.jpg`))) {
       fs.copyFileSync(path.join(PHOTOS, `${id}.jpg`), big);
       fs.copyFileSync(path.join(PHOTOS, `${id}-800.jpg`), small);

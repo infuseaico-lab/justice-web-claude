@@ -63,7 +63,7 @@ Email is sent with PHP `mail()` from `no-reply@justiceenergyco.com`. To keep it 
 
 ### How replaceable photos work
 
-Pages show photos from `/img/slot/<name>.jpg`. `.htaccess` serves the admin-uploaded version from `uploads/slots/` when one exists, and the default from `assets/slots/` otherwise. This needs Apache `mod_rewrite`, which cPanel hosts have enabled.
+Pages show photos from `/img/slot/<name>.jpg`, or `.webp` for slots whose default is a WebP photo (currently `turf-replacement`). To give a slot a WebP default, add `src/assets/slots/<name>.webp` (1600 × 1200) and `<name>-800.webp` (800 × 600), then run `node scripts/raster.js` to make the JPG copies and `node build.js`. Admin uploads are saved as both JPG and WebP. `.htaccess` serves the admin-uploaded version from `uploads/slots/` when one exists, and the default from `assets/slots/` otherwise. This needs Apache `mod_rewrite`, which cPanel hosts have enabled.
 
 ## Project layout
 

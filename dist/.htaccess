@@ -14,9 +14,12 @@ ErrorDocument 404 /404.html
 
   # Page photos: serve the photo uploaded in the admin when there is one,
   # otherwise the default that ships with the site.
-  RewriteCond %{DOCUMENT_ROOT}/uploads/slots/$1 -f
-  RewriteRule ^img/slot/([a-z0-9-]+\.jpg)$ uploads/slots/$1 [L]
-  RewriteRule ^img/slot/([a-z0-9-]+\.jpg)$ assets/slots/$1 [L]
+  RewriteCond %{DOCUMENT_ROOT}/uploads/slots/$1.$2 -f
+  RewriteRule ^img/slot/([a-z0-9-]+)\.(jpg|webp)$ uploads/slots/$1.$2 [L]
+  # An upload saved only as JPG (server without WebP support) still replaces a WebP default.
+  RewriteCond %{DOCUMENT_ROOT}/uploads/slots/$1.jpg -f
+  RewriteRule ^img/slot/([a-z0-9-]+)\.(jpg|webp)$ uploads/slots/$1.jpg [L]
+  RewriteRule ^img/slot/([a-z0-9-]+\.(jpg|webp))$ assets/slots/$1 [L]
 
   # Old URLs -> new URLs (add more during content migration)
   RewriteRule ^contact-us/?$ /contact/ [R=301,L]
@@ -39,7 +42,7 @@ ErrorDocument 404 /404.html
   <FilesMatch "\.(css|js|svg|png|ico|webmanifest)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
-  <FilesMatch "\.(jpe?g)$">
+  <FilesMatch "\.(jpe?g|webp)$">
     Header set Cache-Control "public, max-age=300, must-revalidate"
   </FilesMatch>
 </IfModule>

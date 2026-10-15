@@ -201,8 +201,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'slot_reset':
             $slot = (string) ($_POST['slot'] ?? '');
             if (in_array($slot, $slotIds, true)) {
-                @unlink(JE_UPLOADS . "/slots/$slot.jpg");
-                @unlink(JE_UPLOADS . "/slots/$slot-800.jpg");
+                foreach (["$slot.jpg", "$slot-800.jpg", "$slot.webp", "$slot-800.webp"] as $file) {
+                    @unlink(JE_UPLOADS . '/slots/' . $file);
+                }
                 flash('ok', 'The original image is back.');
             }
             go('photos', 'slot-' . $slot);

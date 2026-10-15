@@ -121,11 +121,14 @@ const SLOTS = [
   { id: 'contact', label: 'Contact & call to action', usedOn: 'Call-to-action banners on every page, thank-you page' },
   { id: 'privacy', label: 'Privacy policy', usedOn: 'Privacy policy page' },
 ];
+// A slot whose default ships as WebP (src/assets/slots/<slot>.webp) is served as WebP; others as JPG.
+const slotExt = (name) => (fs.existsSync(path.join(SRC, 'assets', 'slots', `${name}.webp`)) ? 'webp' : 'jpg');
 function img(name, alt, { eager = false, sizes = '(min-width: 1024px) 50vw, 100vw' } = {}) {
   const loading = eager ? ' fetchpriority="high"' : ' loading="lazy"';
-  return `<img src="/img/slot/${name}.jpg" srcset="/img/slot/${name}-800.jpg 800w, /img/slot/${name}.jpg 1600w" sizes="${sizes}" alt="${esc(alt)}" width="1600" height="1200"${loading} decoding="async">`;
+  const ext = slotExt(name);
+  return `<img src="/img/slot/${name}.${ext}" srcset="/img/slot/${name}-800.${ext} 800w, /img/slot/${name}.${ext} 1600w" sizes="${sizes}" alt="${esc(alt)}" width="1600" height="1200"${loading} decoding="async">`;
 }
-const imgUrl = (name) => `/img/slot/${name}.jpg`;
+const imgUrl = (name) => `/img/slot/${name}.${slotExt(name)}`;
 
 /* ---------- schema ---------- */
 function businessSchema() {
