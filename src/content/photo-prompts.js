@@ -52,7 +52,7 @@ module.exports = {
       alt: 'Technician in a navy work shirt shaking hands with a smiling homeowner in front of a house',
     },
     contact: {
-      prompt: 'Smiling young Caucasian woman with dark brown hair, working as a customer-service representative, wearing a light headset at a bright, tidy office desk, talking on a call while taking notes, laptop open, plants and natural light in the background, candid.',
+      prompt: 'Smiling young Caucasian woman with dark brown hair, working as a customer-service representative, dressed for summer in a light, airy short-sleeve white linen blouse, wearing a light headset at a bright, tidy office desk, talking on a call while taking notes, a desktop computer monitor on a stand with a wireless keyboard in front of her (no laptop), plants and natural summer light in the background, candid.',
       alt: 'Customer-service representative on a call at a bright office desk',
     },
     privacy: {
