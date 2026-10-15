@@ -24,6 +24,8 @@ const YEAR = new Date().getFullYear();
 const esc = (s = '') =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const abs = (p) => site.url + p;
+// Lower-case a service name for use mid-sentence, keeping acronyms such as HVAC and LED.
+const lc = (name) => name.replace(/\b([A-Za-z][a-z]*)\b/g, (w) => w.toLowerCase());
 const serviceBySlug = Object.fromEntries(services.map((s) => [s.slug, s]));
 const programById = Object.fromEntries(programs.map((p) => [p.id, p]));
 
@@ -625,7 +627,7 @@ ${pageHero({
 })}
 <section class="section" aria-labelledby="options-title">
   <div class="container">
-    ${sectionHead({ eyebrow: 'Options', title: `<span id="options-title">${esc(s.name)} options we offer</span>` })}
+    ${sectionHead({ eyebrow: 'Options', title: `<span id="options-title">${esc(s.name.charAt(0) + lc(s.name).slice(1))} options we offer</span>` })}
     <div class="cards cards--3">${s.options.map((o) => `<div class="option" data-reveal>${ico(o.icon, 'ico--lg')}<h3>${esc(o.name)}</h3><p>${esc(o.text)}</p></div>`).join('')}</div>
   </div>
 </section>
@@ -645,7 +647,7 @@ ${pageHero({
 </section>
 <section class="section" aria-labelledby="process-title">
   <div class="container">
-    ${sectionHead({ eyebrow: 'Process', title: `<span id="process-title">How your ${esc(s.name.toLowerCase())} project works</span>`, center: true })}
+    ${sectionHead({ eyebrow: 'Process', title: `<span id="process-title">How your ${esc(lc(s.name))} project works</span>`, center: true })}
     ${steps(s.process)}
   </div>
 </section>
@@ -656,7 +658,7 @@ ${
     <div data-reveal>
       <p class="eyebrow">Programs</p>
       <h2 id="programs-title">Programs that may apply</h2>
-      <p class="lead">Depending on your property and eligibility, these programs may support a ${esc(s.name.toLowerCase())} upgrade. We review the current details with you.</p>
+      <p class="lead">Depending on your property and eligibility, these programs may support this upgrade. We review the current details with you.</p>
       <ul class="pills">${related.map((r) => `<li><a class="pill" href="/programs/#${r.id}">${esc(r.name)}</a></li>`).join('')}</ul>
       ${programNotice()}
     </div>
@@ -667,7 +669,7 @@ ${
 }
 <section class="section" aria-labelledby="faq-title">
   <div class="container">
-    ${sectionHead({ eyebrow: 'FAQ', title: `<span id="faq-title">${esc(s.name)} questions</span>`, center: true })}
+    ${sectionHead({ eyebrow: 'FAQ', title: `<span id="faq-title">${esc(s.name.charAt(0) + lc(s.name).slice(1))} questions</span>`, center: true })}
     ${faqBlock(s.faqs, true)}
   </div>
 </section>
@@ -677,7 +679,7 @@ ${
     <div class="cards">${others.map((o) => serviceCard(o)).join('')}</div>
   </div>
 </section>
-${ctaBand({ title: `Talk to us about ${esc(s.name.toLowerCase())}`, primary: { href: `/contact/?service=${s.slug}`, label: 'Request a consultation' } })}`;
+${ctaBand({ title: `Talk to us about ${esc(lc(s.name))}`, primary: { href: `/contact/?service=${s.slug}`, label: 'Request a consultation' } })}`;
   addPage(
     {
       path: p,
@@ -733,7 +735,7 @@ ${pageHero({
     ${programs
       .map(
         (p) => `<article class="program" id="${p.id}" data-reveal>
-      <div class="program-head"><span class="program-logo" aria-hidden="true">${esc(p.name.replace(/[^A-Za-z]/g, '').slice(0, 4).toUpperCase())}</span><h2>${esc(p.name)}${p.longName ? `<span class="long-name">${esc(p.longName)}</span>` : ''}</h2></div>
+      <div class="program-head">${ico(p.services.every((sl) => ['water-conservation', 'turf-replacement'].includes(sl)) ? 'drop' : 'bolt', 'ico--lg')}<h2>${esc(p.name)}${p.longName ? `<span class="long-name">${esc(p.longName)}</span>` : ''}</h2></div>
       <p>${esc(p.description)}</p>
       <span class="program-label">Related services</span>
       <ul class="pills">${p.services.map((sl) => serviceBySlug[sl]).filter(Boolean).map((sv) => `<li><a class="pill" href="/services/${sv.slug}/">${esc(sv.name)}</a></li>`).join('')}</ul>

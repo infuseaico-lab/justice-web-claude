@@ -12,28 +12,28 @@ const OUT = path.join(__dirname, '..', 'src', 'assets', 'img');
 fs.mkdirSync(OUT, { recursive: true });
 
 const C = {
-  navy: '#0f2a3f',
-  navy2: '#1d4766',
-  navy3: '#2e5f82',
-  teal: '#0e9384',
-  teal2: '#14b8a6',
-  tealLight: '#9fe0d5',
-  mint: '#dff4ef',
+  navy: '#1f3354',
+  navy2: '#2c4670',
+  navy3: '#406093',
+  teal: '#406093',
+  teal2: '#4a8be0',
+  tealLight: '#b9d3f4',
+  mint: '#e3eefb',
   amber: '#f6b941',
   amberLight: '#ffe3a1',
   coral: '#e9785f',
   blue: '#3b8fd1',
   blueLight: '#cfe6f6',
   wall: '#ffffff',
-  wall2: '#eef3f6',
-  wall3: '#dfe8ee',
+  wall2: '#eef3fa',
+  wall3: '#dde6f2',
   ground: '#efe7d6',
   ground2: '#e2d6bd',
   rock: '#c9c1b2',
   rock2: '#b3aa98',
-  leaf: '#2f8a68',
-  leaf2: '#55ad84',
-  leaf3: '#8fcf9f',
+  leaf: '#5a9a36',
+  leaf2: '#7cbf52',
+  leaf3: '#93d16b',
   sage: '#9fbfa6',
 };
 const FONT = "Inter, 'Segoe UI', Roboto, Arial, sans-serif";
@@ -85,7 +85,7 @@ function cloud(x, y, s = 1, o = 0.9) {
     <rect x="0" y="22" width="170" height="34" rx="17"/><circle cx="55" cy="26" r="28"/><circle cx="100" cy="18" r="34"/><circle cx="138" cy="34" r="22"/></g>`;
 }
 
-function hills(w, y, c1 = '#cfe7e2', c2 = '#b4dad2') {
+function hills(w, y, c1 = '#d3e3f5', c2 = '#bcd4ef') {
   return `<path d="M0 ${y + 40} C ${w * 0.18} ${y - 50}, ${w * 0.36} ${y + 10}, ${w * 0.55} ${y - 20} S ${w * 0.85} ${y + 30}, ${w} ${y - 30} V ${y + 260} H 0 Z" fill="${c1}"/>
   <path d="M0 ${y + 90} C ${w * 0.22} ${y + 30}, ${w * 0.42} ${y + 90}, ${w * 0.62} ${y + 50} S ${w * 0.9} ${y + 80}, ${w} ${y + 40} V ${y + 260} H 0 Z" fill="${c2}"/>`;
 }
@@ -134,7 +134,10 @@ function tree(x, y, s = 1) {
     <ellipse cx="${x}" cy="${y - 190 * s}" rx="${60 * s}" ry="${42 * s}" fill="#8cbc93"/></g>`;
 }
 
-function chip(x, y, text, color = C.teal, icon = 'dot') {
+function chip() {
+  return '';
+}
+function unusedChip(x, y, text, color = C.teal, icon = 'dot') {
   const w = Math.round(text.length * 11.6 + 78);
   const icons = {
     dot: `<circle cx="${x + 30}" cy="${y + 29}" r="9" fill="#fff"/>`,
@@ -267,13 +270,13 @@ scenes['services-cutaway'] = () => {
   g += `<g filter="url(#shadow)"><path d="M200 330 L 600 140 L 1000 330 V 770 H 200 Z" fill="${C.wall2}"/></g>`;
   g += `<path d="M170 346 L 600 128 L 1030 346 L 1030 316 L 600 98 L 170 316 Z" fill="${C.navy}"/>`;
   // rooms
-  g += `<rect x="225" y="345" width="362" height="200" fill="#e8f5f6"/>`; // bath
+  g += `<rect x="225" y="345" width="362" height="200" fill="#eaf2fb"/>`; // bath
   g += `<rect x="613" y="345" width="362" height="200" fill="#f4f6fb"/>`; // living
   g += `<rect x="225" y="565" width="362" height="190" fill="#eef1f3"/>`; // utility
   g += `<rect x="613" y="565" width="362" height="190" fill="#fbf4e6"/>`; // kitchen
   g += `<path d="M200 555 H 1000 M 600 330 V 770" stroke="#fff" stroke-width="20"/>`;
   // bath: shower + toilet + tile
-  g += `<g stroke="#d3ebee" stroke-width="2">${[0, 1, 2, 3, 4, 5].map((i) => `<line x1="225" y1="${375 + i * 30}" x2="420" y2="${375 + i * 30}"/>`).join('')}</g>`;
+  g += `<g stroke="#dce7f4" stroke-width="2">${[0, 1, 2, 3, 4, 5].map((i) => `<line x1="225" y1="${375 + i * 30}" x2="420" y2="${375 + i * 30}"/>`).join('')}</g>`;
   g += `<path d="M260 370 H 300 V 392" stroke="${C.navy3}" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M276 392 H 324 L 316 404 H 284 Z" fill="${C.navy3}"/>`;
   g += drops(300, 412, 6, 56, 34);
   g += `<rect x="250" y="530" width="120" height="12" rx="4" fill="#c7dfe3"/>`;
@@ -362,8 +365,8 @@ scenes['hvac'] = () => {
 /* ---------- Water conservation ---------- */
 scenes['water-conservation'] = () => {
   const W = 1200, H = 900;
-  let g = `<rect width="${W}" height="${H}" fill="#eaf5f6"/>`;
-  g += `<g stroke="#d7ebee" stroke-width="3">${Array.from({ length: 16 }, (_, i) => `<line x1="0" y1="${i * 60}" x2="470" y2="${i * 60}"/>`).join('')}${Array.from({ length: 8 }, (_, i) => `<line x1="${i * 60}" y1="0" x2="${i * 60}" y2="780"/>`).join('')}</g>`;
+  let g = `<rect width="${W}" height="${H}" fill="#eef4fb"/>`;
+  g += `<g stroke="#dce7f4" stroke-width="3">${Array.from({ length: 16 }, (_, i) => `<line x1="0" y1="${i * 60}" x2="470" y2="${i * 60}"/>`).join('')}${Array.from({ length: 8 }, (_, i) => `<line x1="${i * 60}" y1="0" x2="${i * 60}" y2="780"/>`).join('')}</g>`;
   g += `<rect x="0" y="780" width="${W}" height="120" fill="#d7e4e8"/><rect x="0" y="770" width="${W}" height="12" fill="#c6d6dc"/>`;
   g += `<rect x="470" y="0" width="10" height="780" fill="#fff"/>`;
   // shower
@@ -393,7 +396,7 @@ scenes['water-conservation'] = () => {
 /* ---------- Turf replacement ---------- */
 scenes['turf-replacement'] = () => {
   const W = 1200, H = 900;
-  let g = `<rect width="${W}" height="${H}" fill="url(#sky)"/>` + sun(170, 150, 50) + cloud(520, 70, 0.9) + hills(W, 400, '#d4e8df', '#bfdccd');
+  let g = `<rect width="${W}" height="${H}" fill="url(#sky)"/>` + sun(170, 150, 50) + cloud(520, 70, 0.9) + hills(W, 400, '#d6e5f5', '#c2d8f0');
   // house edge right
   g += `<g filter="url(#shadow)"><rect x="880" y="250" width="320" height="380" fill="#fff"/></g><path d="M860 262 L 1200 220 V 196 L 860 238 Z" fill="${C.navy}"/>`;
   g += `<rect x="930" y="330" width="170" height="170" rx="6" fill="url(#coolGlass)"/><path d="M1015 330 V 500 M 930 415 H 1100" stroke="#fff" stroke-width="6"/>`;
@@ -449,8 +452,8 @@ scenes['led-lighting'] = () => {
 /* ---------- Programs ---------- */
 scenes['programs'] = () => {
   const W = 1200, H = 900;
-  let g = `<rect width="${W}" height="${H}" fill="#eaf5f3"/>`;
-  g += `<circle cx="1050" cy="150" r="260" fill="#d7efe9"/><circle cx="120" cy="820" r="240" fill="#dcecf5"/>`;
+  let g = `<rect width="${W}" height="${H}" fill="#eef4fb"/>`;
+  g += `<circle cx="1050" cy="150" r="260" fill="#dde9f8"/><circle cx="120" cy="820" r="240" fill="#dcecf5"/>`;
   // card 1: home
   g += `<g filter="url(#shadow)"><rect x="110" y="300" width="300" height="340" rx="28" fill="#fff"/></g>${miniHouse(170, 350, 1)}`;
   g += `<rect x="150" y="560" width="160" height="14" rx="7" fill="${C.navy}"/><rect x="150" y="590" width="220" height="10" rx="5" fill="${C.wall3}"/>`;
@@ -493,10 +496,10 @@ scenes['about'] = () => {
 /* ---------- Contact ---------- */
 scenes['contact'] = () => {
   const W = 1200, H = 900;
-  let g = `<rect width="${W}" height="${H}" fill="#eef4f2"/>`;
+  let g = `<rect width="${W}" height="${H}" fill="#eef3f9"/>`;
   // stylized map
   g += `<path d="M0 640 C 220 560, 420 700, 640 610 S 1000 520, 1200 600 V 900 H 0 Z" fill="#cfe6f2"/>`;
-  g += `<g fill="#e3efe7">${[[60, 60, 260, 180], [360, 40, 220, 220], [640, 80, 260, 160], [940, 50, 220, 200], [80, 300, 200, 200], [330, 320, 280, 180], [680, 300, 200, 180], [940, 300, 220, 200]].map(([x, y, w, h]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18"/>`).join('')}</g>`;
+  g += `<g fill="#e2eaf4">${[[60, 60, 260, 180], [360, 40, 220, 220], [640, 80, 260, 160], [940, 50, 220, 200], [80, 300, 200, 200], [330, 320, 280, 180], [680, 300, 200, 180], [940, 300, 220, 200]].map(([x, y, w, h]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18"/>`).join('')}</g>`;
   g += `<path d="M0 270 H 1200 M 320 0 V 600 M 620 0 V 560 M 910 0 V 560 M 0 520 C 300 500, 700 560, 1200 470" stroke="#fff" stroke-width="22" fill="none"/>`;
   g += `<path d="M0 270 H 1200 M 320 0 V 600" stroke="${C.amberLight}" stroke-width="6" fill="none" stroke-dasharray="20 18"/>`;
   // pin
