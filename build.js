@@ -304,7 +304,7 @@ function footer() {
     <p class="footer-disclaimer">Program participation, incentive amounts, eligibility and funding availability are set by each program and are not guaranteed. Illustrations on this site are for explanation only and do not depict completed client projects.</p>
     <div class="footer-bottom">
       <p>© ${YEAR} ${esc(site.name)} All rights reserved.${site.license ? ` ${esc(site.license)}` : ''}</p>
-      <p><a href="/privacy-policy/">Privacy policy</a> · <a href="/sitemap.xml">Sitemap</a></p>
+      <p><a href="/privacy-policy/">Privacy policy</a> · <a href="/sitemap.xml" target="_blank" rel="noopener">Sitemap</a></p>
     </div>
   </div>
 </footer>
