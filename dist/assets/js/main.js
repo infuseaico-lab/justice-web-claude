@@ -158,6 +158,12 @@
       return;
     }
 
+    // Demo previews never send data: go straight to the confirmation page.
+    if (form.hasAttribute('data-demo')) {
+      window.location.href = form.getAttribute('data-success') || '/thank-you/';
+      return;
+    }
+
     submit.setAttribute('aria-busy', 'true');
     var endpoint = form.getAttribute('data-endpoint');
     var request = endpoint
