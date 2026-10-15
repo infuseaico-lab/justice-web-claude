@@ -17,7 +17,7 @@ const BANNER = `<div role="note" style="background:#16243b;color:#ffffff;font:60
 
 // The preview viewer keeps the scroll position when moving between pages; start each page at the top
 // unless the link points at a section (#anchor) or the visitor has already started scrolling.
-const TOP = `<script>(function(){if(location.hash)return;try{history.scrollRestoration='manual'}catch(e){}var moved=false;['wheel','touchstart','keydown','mousedown'].forEach(function(t){addEventListener(t,function(){moved=true},{once:true,passive:true})});function top(){if(!moved)window.scrollTo(0,0)}top();addEventListener('DOMContentLoaded',top);addEventListener('load',function(){top();setTimeout(top,60);setTimeout(top,250);setTimeout(top,700)});addEventListener('pageshow',top)})();</script>`;
+const TOP = `<script>(function(){if(location.hash)return;try{history.scrollRestoration='manual'}catch(e){}var root=document.documentElement;root.style.scrollBehavior='auto';var moved=false;['wheel','touchstart','keydown','mousedown'].forEach(function(t){addEventListener(t,function(){moved=true},{once:true,passive:true})});function top(){if(!moved&&scrollY!==0)window.scrollTo({top:0,left:0,behavior:'instant'})}top();addEventListener('scroll',top,{passive:true});addEventListener('DOMContentLoaded',top);addEventListener('pageshow',top);addEventListener('load',function(){top();setTimeout(function(){removeEventListener('scroll',top);root.style.scrollBehavior=''},1500)})})();</script>`;
 
 function walk(dir, base = '') {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
