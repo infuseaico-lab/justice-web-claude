@@ -36,8 +36,8 @@ module.exports = {
       alt: 'Modern bathroom with an efficient showerhead, water-saving faucet and low-flow toilet',
     },
     'turf-replacement': {
-      prompt: 'Southern California front yard after lawn replacement: drought-tolerant native plants, succulents, ornamental grasses, boulders, a stepping-stone path through decomposed granite and visible drip irrigation, single-story home in the background, golden-hour light.',
-      alt: 'Backyard with a green lawn, a stepping-stone path, lounge seating and planted borders lit at dusk',
+      prompt: 'Wide shot of two different-looking landscaping installers (one older with a gray beard, one younger) in matching navy work shirts, gloves and knee pads installing artificial turf in a Southern California backyard: they unroll a long, solid roll of realistic synthetic grass across a smooth, compacted decomposed-granite base, with most of the yard already covered in lush, even artificial turf neatly trimmed along a concrete border, a few more tightly rolled turf rolls nearby, single-story stucco home with a patio in the background, sunny morning, workers focused on the job and not looking at the camera.',
+      alt: 'Landscaping crew installing artificial turf in a Southern California backyard',
     },
     'led-lighting': {
       prompt: 'Bright modern kitchen at dusk, photographed from a three-quarter side angle so a row of three LED pendant lights is clearly hanging over the middle of a white quartz island, recessed LED downlights in the ceiling and under-cabinet lighting, white shaker cabinets, crisp neutral-white 3500K light, white surfaces look truly white with no yellow, orange or amber cast, well exposed, clean and inviting.',

@@ -183,7 +183,7 @@ module.exports = [
     name: 'Turf Replacement',
     icon: 'leaf',
     image: 'turf-replacement',
-    imageAlt: 'Backyard with a green lawn, a stepping-stone path, lounge seating and planted borders lit at dusk',
+    imageAlt: 'Landscaping crew installing artificial turf in a Southern California backyard',
     title: 'Turf Replacement & Water-Wise Yards',
     metaDescription:
       'Replace thirsty lawn with a water-wise landscape. Learn about turf replacement options and the consultation process for Southern California homes.',
