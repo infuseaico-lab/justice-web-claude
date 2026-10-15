@@ -13,7 +13,7 @@ const DIST = path.join(__dirname, '..', 'dist');
 const OUT = path.resolve(process.argv[2] || path.join(__dirname, '..', 'demo'));
 const SKIP = new Set(['.htaccess', '_headers', '_redirects']);
 
-const BANNER = `<div role="note" style="background:#f6b941;color:#081a29;font:600 14px/1.4 Inter,system-ui,sans-serif;text-align:center;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))">Design preview prepared by Infuse AI for Justice Energy Co. Not the live website: contact details are placeholders and the form does not send.</div>`;
+const BANNER = `<div role="note" style="background:#f6b941;color:#081a29;font:600 14px/1.4 Inter,system-ui,sans-serif;text-align:center;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))">Design preview prepared by Infuse AI for Justice Energy Co. Not the live website: the form does not send.</div>`;
 
 function walk(dir, base = '') {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {

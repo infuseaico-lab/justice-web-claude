@@ -263,7 +263,7 @@ function footer() {
         <li>${icon('phone')}<a href="tel:${site.phoneHref}">${esc(site.phone)}</a></li>
         <li>${icon('mail')}<a href="mailto:${esc(site.email)}">${esc(site.email)}</a></li>
         <li>${icon('pin')}<span>${addr || `Serving ${esc(site.serviceArea)}`}</span></li>
-        ${site.hours ? `<li>${icon('clock')}<span>${esc(site.hours)}</span></li>` : ''}
+        ${site.hours ? `<li>${icon('clock')}<span>${esc(site.hours)}${site.hoursClosed ? `<br>${esc(site.hoursClosed)}` : ''}</span></li>` : ''}
       </ul>
     </div>
   </div>
@@ -936,8 +936,9 @@ ${pageHero({
     <aside class="info-stack" aria-label="Contact details">
       <div class="info-item">${ico('phone')}<div><h3>Call us</h3><a href="tel:${site.phoneHref}">${esc(site.phone)}</a></div></div>
       <div class="info-item">${ico('mail')}<div><h3>Email</h3><a href="mailto:${esc(site.email)}">${esc(site.email)}</a></div></div>
-      ${site.hours ? `<div class="info-item">${ico('clock')}<div><h3>Hours</h3><p>${esc(site.hours)}</p></div></div>` : ''}
-      <div class="info-item">${ico('pin')}<div><h3>Service area</h3><p>${esc(site.areaServed.join(', '))}</p></div></div>
+      ${site.hours ? `<div class="info-item">${ico('clock')}<div><h3>Hours</h3><p>${esc(site.hours)}${site.hoursClosed ? `<br>${esc(site.hoursClosed)}` : ''}</p></div></div>` : ''}
+      ${site.address.street ? `<div class="info-item">${ico('pin')}<div><h3>Office</h3><p>${esc(site.address.street)}<br>${esc(site.address.city)}, ${esc(site.address.region)} ${esc(site.address.postalCode)}</p></div></div>` : ''}
+      <div class="info-item">${ico('home')}<div><h3>Service area</h3><p>${esc(site.areaServed.join(', '))}</p></div></div>
       <div class="panel">
         <h3>What happens next</h3>
         <ol class="mini-steps">

@@ -13,26 +13,25 @@ module.exports = {
   description:
     'Energy-efficiency upgrades for Southern California homes: heat pump & tankless water heaters, mini-splits, low-flow fixtures, turf replacement and LED lighting.',
 
-  // Set to true once phone, email, address and hours are confirmed. While false, the
-  // contact details still show on the page but are left out of the schema markup.
-  detailsVerified: false,
+  // Contact details confirmed by the client; they also go into the schema markup.
+  detailsVerified: true,
 
-  // TODO: confirm with the client. The phone below is a placeholder from the reserved 555 range.
-  phone: '(555) 010-0199',
-  phoneHref: '+15550100199',
-  email: 'info@justiceenergyco.com', // TODO: confirm inbox
+  phone: '(866) 504-8989',
+  phoneHref: '+18665048989',
+  email: 'info@justiceenergyco.com',
   address: {
-    street: '', // TODO: street address, or leave empty for a service-area business
-    city: '', // TODO
+    street: '12631 Imperial Hwy. D-130',
+    city: 'Santa Fe Springs',
     region: 'CA',
-    postalCode: '', // TODO
+    postalCode: '90670',
     country: 'US',
   },
   serviceArea: 'Southern California', // TODO: list counties or cities served
   areaServed: ['Los Angeles County', 'Orange County'], // TODO: confirm
-  hours: 'Mon–Fri, 8:00 am – 5:00 pm', // TODO: confirm
+  hours: 'Mon–Fri, 8:30 am – 5:00 pm',
+  hoursClosed: 'Sat & Sun closed',
   // schema.org openingHours format; set to [] to omit.
-  openingHours: ['Mo-Fr 08:00-17:00'],
+  openingHours: ['Mo-Fr 08:30-17:00'],
   license: '', // TODO: e.g. 'CSLB #1234567' — shown in the footer when set
   social: {
     // TODO: add profile URLs; empty values are hidden.

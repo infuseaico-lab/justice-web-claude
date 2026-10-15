@@ -37,7 +37,7 @@ Run the build after changing any file in `src/`. To regenerate artwork, run `npm
 
 ## Before launch: checklist
 
-1. **Business details**: update `src/site.config.js` with the verified phone, email, address, hours, service area, license number and social links, then set `detailsVerified: true` so they appear in the schema markup. The phone number in the config now is a placeholder.
+1. **Business details**: phone, email, office address and hours are confirmed in `src/site.config.js`. Still to add: the service area (counties or cities), license number and social profile links.
 2. **Programs**: confirm each program's official name, description, participation and eligibility wording in `src/content/programs.js`, and set `approved: true`. Add approved logos if supplied.
 3. **Privacy policy**: the text is a general draft and needs the client's approval or legal review.
 4. **Brand**: the logo is a placeholder mark. Swap in the client logo (header/footer `LOGO` in `build.js`, `favicon.svg`) if one exists.
