@@ -527,7 +527,7 @@ scenes['privacy'] = () => {
 
 /* ---------- Brand mark (placeholder logo) ---------- */
 function logoMark() {
-  return `<rect width="64" height="64" rx="16" fill="${C.navy}"/><path d="M36 10 L 16 37 H 30 L 26 54 L 48 26 H 34 Z" fill="${C.amber}"/><path d="M16 50 C 22 44 30 44 36 50" stroke="${C.teal2}" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+  return `<rect width="64" height="64" rx="16" fill="#406093"/><path d="M36 10 L 16 37 H 30 L 26 54 L 48 26 H 34 Z" fill="#93d16b"/><path d="M16 50 C 22 44 30 44 36 50" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/>`;
 }
 const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">${logoMark()}</svg>\n`;
 

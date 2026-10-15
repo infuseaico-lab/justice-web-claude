@@ -35,13 +35,13 @@ const logo = fs.readFileSync(path.join(IMG, 'favicon.svg'), 'utf8');
 
 function cardHtml(c) {
   return `<!doctype html><html><head><style>
-  body{margin:0;width:1200px;height:630px;font-family:'Plus Jakarta Sans',Inter,Arial,sans-serif;}
-  .wrap{display:grid;grid-template-columns:560px 640px;height:630px;background:#0f2a3f;}
-  .text{padding:64px 56px;display:flex;flex-direction:column;color:#c9d8e2;background:radial-gradient(500px 300px at 0% 100%,rgba(246,185,65,.18),transparent 60%),linear-gradient(140deg,#081a29,#163853);}
+  body{margin:0;width:1200px;height:630px;font-family:'Nunito Sans',Arial,sans-serif;}
+  .wrap{display:grid;grid-template-columns:560px 640px;height:630px;background:#406093;}
+  .text{padding:64px 56px;display:flex;flex-direction:column;color:#dbe6f6;background:#406093;}
   .brand{display:flex;align-items:center;gap:16px;color:#fff;font-weight:800;font-size:28px;}
   .brand svg{width:64px;height:64px}
-  .brand small{display:block;font-size:15px;letter-spacing:.18em;color:#14b8a6;font-weight:700}
-  .eyebrow{margin-top:auto;color:#f6b941;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:18px}
+  .brand small{display:block;font-size:15px;letter-spacing:.18em;color:#93d16b;font-weight:700}
+  .eyebrow{margin-top:auto;color:#93d16b;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:18px}
   h1{color:#fff;font-size:${c.title.length > 40 ? 46 : 56}px;line-height:1.08;margin:14px 0 22px;letter-spacing:-.02em}
   .url{font-size:20px;color:#9fb4c4}
   .img{background:url('${svgData(c.image)}') center/cover no-repeat}
@@ -64,7 +64,7 @@ function cardHtml(c) {
     await page.setContent(`<body style="margin:0;background:${bg}"><div style="width:${size}px;height:${size}px;display:grid;place-items:center">${logo.replace('<svg ', `<svg width="${size - pad * 2}" height="${size - pad * 2}" `)}</div></body>`);
     await page.screenshot({ path: out, omitBackground: bg === 'transparent' });
   };
-  await icon(180, path.join(IMG, 'apple-touch-icon.png'), 0, '#0f2a3f');
+  await icon(180, path.join(IMG, 'apple-touch-icon.png'), 0, '#406093');
   await icon(192, path.join(IMG, 'icon-192.png'));
   await icon(512, path.join(IMG, 'icon-512.png'));
   await icon(512, path.join(IMG, 'logo.png'));

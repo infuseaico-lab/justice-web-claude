@@ -75,17 +75,24 @@ const icon = (name, extra = '') =>
   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"${extra}>${ICONS[name] || ICONS.check}</svg>`;
 const ico = (name, cls = '') => `<span class="ico ${cls}">${icon(name)}</span>`;
 
-const LOGO = `<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="16" fill="#0f2a3f"/><path d="M36 10 L 16 37 H 30 L 26 54 L 48 26 H 34 Z" fill="#f6b941"/><path d="M16 50 C 22 44 30 44 36 50" stroke="#14b8a6" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
+const LOGO = `<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="16" fill="#406093"/><path d="M36 10 L 16 37 H 30 L 26 54 L 48 26 H 34 Z" fill="#93d16b"/><path d="M16 50 C 22 44 30 44 36 50" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
 const brand = () =>
   `<a class="brand" href="/" aria-label="${esc(site.name)} — home">${LOGO}<span class="brand-text"><strong>Justice Energy</strong><span>Co.</span></span></a>`;
 
 /* ---------- images ---------- */
-// All illustrations are 1200×900 SVGs; width/height attributes reserve space and prevent layout shift.
-function img(name, alt, { eager = false, sizes } = {}) {
-  return `<img src="/assets/img/${name}.svg" alt="${esc(alt)}" width="1200" height="900"${
-    eager ? ' fetchpriority="high"' : ' loading="lazy"'
-  } decoding="async"${sizes ? ` sizes="${sizes}"` : ''}>`;
+// Photographs live in src/assets/photos as <slot>.jpg (1600×1200) and <slot>-800.jpg (800×600),
+// fetched by scripts/fetch-photos.js. A slot without a photo falls back to its drawing.
+const photos = Object.fromEntries(require('./src/content/photos').map((p) => [p.slot, p]));
+const hasPhoto = (name) => fs.existsSync(path.join(SRC, 'assets', 'photos', `${name}.jpg`));
+function img(name, alt, { eager = false, sizes = '(min-width: 1024px) 50vw, 100vw' } = {}) {
+  const loading = eager ? ' fetchpriority="high"' : ' loading="lazy"';
+  if (hasPhoto(name)) {
+    const photoAlt = (photos[name] && photos[name].alt) || alt;
+    return `<img src="/assets/photos/${name}.jpg" srcset="/assets/photos/${name}-800.jpg 800w, /assets/photos/${name}.jpg 1600w" sizes="${sizes}" alt="${esc(photoAlt)}" width="1600" height="1200"${loading} decoding="async">`;
+  }
+  return `<img src="/assets/img/${name}.svg" alt="${esc(alt)}" width="1200" height="900"${loading} decoding="async">`;
 }
+const imgUrl = (name) => (hasPhoto(name) ? `/assets/photos/${name}.jpg` : `/assets/img/${name}.svg`);
 
 /* ---------- schema ---------- */
 function businessSchema() {
@@ -155,7 +162,7 @@ function head(page) {
 <meta name="description" content="${esc(page.description)}">
 <meta name="robots" content="${page.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}">
 <link rel="canonical" href="${canonical}">
-<meta name="theme-color" content="#0f2a3f">
+<meta name="theme-color" content="#406093">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${esc(site.name)}">
 <meta property="og:locale" content="en_US">
@@ -174,10 +181,10 @@ function head(page) {
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-${page.preload ? `<link rel="preload" as="image" href="/assets/img/${page.preload}.svg" fetchpriority="high">` : ''}
+${page.preload ? `<link rel="preload" as="image" href="${imgUrl(page.preload)}" fetchpriority="high">` : ''}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="/assets/css/styles.css?v=${CSS_V}">
 ${ld}
 ${ga}
@@ -1086,7 +1093,7 @@ function build() {
         start_url: '/',
         display: 'browser',
         background_color: '#ffffff',
-        theme_color: '#0f2a3f',
+        theme_color: '#406093',
         icons: [
           { src: '/assets/img/icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: '/assets/img/icon-512.png', sizes: '512x512', type: 'image/png' },
