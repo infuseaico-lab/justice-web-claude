@@ -20,7 +20,7 @@ module.exports = {
       alt: 'Modern Southern California home with a drought-tolerant front yard and an outdoor heat pump on a sunny day',
     },
     'services-cutaway': {
-      prompt: 'Professional HVAC technician in a navy work shirt installing an outdoor heat pump unit beside a modern stucco home, organized tools on a mat, friendly and competent, mid-morning sun, technician seen from the side, not looking at the camera.',
+      prompt: 'Professional HVAC technician in a navy work shirt installing an outdoor heat pump unit beside a modern stucco home, the unit a realistic single-fan design with one round fan grille on its front face and plain side panels, organized tools on a mat, friendly and competent, mid-morning sun, technician seen from the side, not looking at the camera.',
       alt: 'Technician installing an outdoor heat pump unit beside a modern home',
     },
     'water-heating': {
@@ -40,7 +40,7 @@ module.exports = {
       alt: 'Backyard with a green lawn, a stepping-stone path, lounge seating and planted borders lit at dusk',
     },
     'led-lighting': {
-      prompt: 'Bright modern kitchen in the evening lit by LED pendant lights over a white quartz island and recessed LED downlights, white shaker cabinets, warm white light, clean and inviting.',
+      prompt: 'Bright modern kitchen at dusk, photographed from a three-quarter side angle so a row of three LED pendant lights is clearly hanging over the middle of a white quartz island, recessed LED downlights in the ceiling and under-cabinet lighting, white shaker cabinets, crisp neutral-white 3500K light, white surfaces look truly white with no yellow, orange or amber cast, well exposed, clean and inviting.',
       alt: 'Modern kitchen lit by LED pendant lights and recessed LED downlights',
     },
     programs: {
