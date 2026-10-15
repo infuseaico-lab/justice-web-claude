@@ -52,4 +52,5 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 AddType image/svg+xml .svg
+AddType image/webp .webp
 AddType application/manifest+json .webmanifest

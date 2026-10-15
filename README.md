@@ -22,7 +22,7 @@ Sign in at `https://justiceenergyco.com/admin/`. It has four sections:
 - **Consultation requests**: every request sent through the contact form, newest first, with click-to-email and click-to-call.
 - **Account**: change the admin password.
 
-Uploads accept JPG, PNG or WebP up to 15 MB, at least 1200 px wide. Photos are re-encoded on upload, which removes hidden data such as GPS location and turns phone photos upright.
+Uploads accept JPG, PNG or WebP up to 15 MB, at least 1200 px wide. Photos are re-encoded on upload (saved as WebP, with a JPG copy for page photos), which removes hidden data such as GPS location and turns phone photos upright.
 
 ### First-time setup
 

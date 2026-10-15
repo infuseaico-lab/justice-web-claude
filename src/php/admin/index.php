@@ -119,13 +119,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 try {
                     $img = je_load_upload($one);
                     $id = date('Ymd') . '-' . bin2hex(random_bytes(5));
-                    [$w, $h] = je_save_fit($img, JE_UPLOADS . "/gallery/$id.jpg", 2000);
-                    je_save_fit($img, JE_UPLOADS . "/gallery/$id-thumb.jpg", 900);
+                    // WebP keeps gallery pages light; JPEG only on a server whose PHP has no WebP support.
+                    $ext = function_exists('imagewebp') ? 'webp' : 'jpg';
+                    [$w, $h] = je_save_fit($img, JE_UPLOADS . "/gallery/$id.$ext", 2000);
+                    je_save_fit($img, JE_UPLOADS . "/gallery/$id-thumb.$ext", 900);
                     imagedestroy($img);
                     array_unshift($items, [
                         'id' => $id,
-                        'file' => "$id.jpg",
-                        'thumb' => "$id-thumb.jpg",
+                        'file' => "$id.$ext",
+                        'thumb' => "$id-thumb.$ext",
                         'w' => $w,
                         'h' => $h,
                         'caption' => $caption,

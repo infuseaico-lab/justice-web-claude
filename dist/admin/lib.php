@@ -244,7 +244,7 @@ function je_save_cover($src, string $dest, int $w, int $h): void
     imagedestroy($out);
 }
 
-/** Scales down to fit within $max pixels on the long side (never enlarges) and saves a JPEG. */
+/** Scales down to fit within $max pixels on the long side (never enlarges) and saves a WebP or JPEG, by $dest's extension. */
 function je_save_fit($src, string $dest, int $max): array
 {
     $sw = imagesx($src);
@@ -255,8 +255,12 @@ function je_save_fit($src, string $dest, int $max): array
     $out = imagecreatetruecolor($w, $h);
     imagefill($out, 0, 0, imagecolorallocate($out, 255, 255, 255));
     imagecopyresampled($out, $src, 0, 0, 0, 0, $w, $h, $sw, $sh);
-    imageinterlace($out, true);
-    imagejpeg($out, $dest, 82);
+    if (str_ends_with($dest, '.webp')) {
+        imagewebp($out, $dest, 80);
+    } else {
+        imageinterlace($out, true);
+        imagejpeg($out, $dest, 82);
+    }
     imagedestroy($out);
     return [$w, $h];
 }
