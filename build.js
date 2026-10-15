@@ -406,8 +406,12 @@ const DEFAULT_STEPS = [
   { title: 'Check program fit', text: 'We point out programs that may apply and what they typically require, before any work begins.' },
   { title: 'Upgrade & follow up', text: 'We schedule the installation, complete the work and walk you through your new equipment.' },
 ];
+// Each step shows an icon for what happens at that stage (the list stays an ordered list for screen readers).
+const STEP_ICONS = ['chat', 'clipboard', 'shield', 'wrench'];
 function steps(list = DEFAULT_STEPS) {
-  return `<ol class="steps">${list.map((s) => `<li class="step" data-reveal><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></li>`).join('')}</ol>`;
+  return `<ol class="steps">${list
+    .map((s, i) => `<li class="step" data-reveal><span class="step-icon" aria-hidden="true">${icon(s.icon || STEP_ICONS[i] || 'check')}</span><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></li>`)
+    .join('')}</ol>`;
 }
 
 function faqBlock(faqs, center = false) {

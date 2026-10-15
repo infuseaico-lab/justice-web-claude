@@ -383,12 +383,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
 @media (min-width: 640px) { .steps { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .steps { grid-template-columns: repeat(4, 1fr); } }
 .step { position: relative; padding: 28px 24px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); counter-increment: step; }
-.step::before {
-  content: counter(step, decimal-leading-zero);
+.step-icon {
   display: inline-grid; place-items: center; width: 48px; height: 48px; margin-bottom: 18px;
   border-radius: 14px; background: var(--navy-900); color: var(--amber-500);
-  font-family: var(--font-head); font-weight: 800; font-size: 1rem;
 }
+.step-icon svg { width: 24px; height: 24px; }
 .step h3 { font-size: 1.1rem; margin-bottom: 6px; }
 .step p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 

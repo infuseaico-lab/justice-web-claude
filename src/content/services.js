@@ -225,7 +225,7 @@ module.exports = [
       { title: 'Consultation', text: 'We discuss your yard, goals and budget, and explain how turf replacement works.' },
       { title: 'Site review & plan', text: 'We measure the area, review site conditions and outline a plant and irrigation plan.' },
       { title: 'Program check', text: 'Some programs require pre-approval before any grass is removed. We review this with you first.' },
-      { title: 'Installation', text: 'We remove the turf, install the new landscape and irrigation, and walk you through care.' },
+      { title: 'Installation', icon: 'leaf', text: 'We remove the turf, install the new landscape and irrigation, and walk you through care.' },
     ],
     faqs: [
       {
