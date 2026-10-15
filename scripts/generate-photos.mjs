@@ -16,6 +16,10 @@
  *   GEMINI_API_KEY  Google gemini-2.5-flash-image  (generativelanguage.googleapis.com)
  *   MAX_API_KEY     Maxgent, via .claude/skills/image-gen (api.maxgent.ai)
  *
+ * In a Claude Code cloud environment, store the key as a network secret instead and run
+ *   NODE_USE_ENV_PROXY=1 node scripts/generate-photos.mjs --provider openai
+ * (the proxy adds the key; Node's fetch needs NODE_USE_ENV_PROXY=1 to use the proxy).
+ *
  * Then run `node scripts/raster.js` (social share cards) and `node build.js`.
  * Needs Node 18+ and ImageMagick (`magick` or `convert`).
  */
@@ -86,13 +90,17 @@ async function download(url, dest) {
   fs.writeFileSync(dest, Buffer.from(await res.arrayBuffer()));
 }
 
+// With no key in the environment, the header is left out so a proxy that holds the key
+// (for example a Claude Code cloud environment's network secret) can add it.
+const auth = (header, prefix, key) => (process.env[key] ? { [header]: `${prefix}${process.env[key]}` } : {});
+
 const providers = {
   openai: {
     key: 'OPENAI_API_KEY',
     async generate(prompt, dest) {
       const res = await fetch('https://api.openai.com/v1/images/generations', {
         method: 'POST',
-        headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, 'Content-Type': 'application/json' },
+        headers: { ...auth('Authorization', 'Bearer ', 'OPENAI_API_KEY'), 'Content-Type': 'application/json' },
         body: JSON.stringify({ model: value('model') || 'gpt-image-1', prompt, size: '1536x1024', quality: 'high', n: 1 }),
       });
       const data = await readJson(res);
@@ -108,7 +116,7 @@ const providers = {
       const model = value('model') || 'fal-ai/nano-banana-pro';
       const res = await fetch(`https://fal.run/${model}`, {
         method: 'POST',
-        headers: { Authorization: `Key ${process.env.FAL_KEY}`, 'Content-Type': 'application/json' },
+        headers: { ...auth('Authorization', 'Key ', 'FAL_KEY'), 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt, aspect_ratio: '4:3', image_size: 'landscape_4_3', num_images: 1, output_format: 'png' }),
       });
       const data = await readJson(res);
@@ -123,7 +131,7 @@ const providers = {
       const model = value('model') || 'gemini-2.5-flash-image';
       const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
         method: 'POST',
-        headers: { 'x-goog-api-key': process.env.GEMINI_API_KEY, 'Content-Type': 'application/json' },
+        headers: { ...auth('x-goog-api-key', '', 'GEMINI_API_KEY'), 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: { responseModalities: ['IMAGE'], imageConfig: { aspectRatio: '4:3' } },
@@ -178,7 +186,10 @@ const providers = {
   if (!provider) {
     throw new Error('No image API key found. Set one of OPENAI_API_KEY, FAL_KEY, GEMINI_API_KEY or MAX_API_KEY (or pass --provider).');
   }
-  if (!process.env[provider.key]) throw new Error(`${provider.key} is not set.`);
+  if (!process.env[provider.key]) {
+    if (name === 'maxgent') throw new Error(`${provider.key} is not set.`);
+    console.log(`${provider.key} is not set: sending requests without it, for a proxy that adds the key.`);
+  }
   console.log(`Generating ${todo.length} photo(s) with ${name}…`);
 
   const work = fs.mkdtempSync(path.join(os.tmpdir(), 'je-photos-'));

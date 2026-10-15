@@ -123,6 +123,8 @@ node scripts/generate-photos.mjs --use hero-home=photo.jpg # install your own ph
 node scripts/raster.js && node build.js                    # refresh share images, rebuild
 ```
 
+In a Claude Code cloud environment, store the key as a **network secret** for the API's host rather than an environment variable, then run `NODE_USE_ENV_PROXY=1 node scripts/generate-photos.mjs --provider openai`. The proxy adds the key to each request, so it never appears in the session.
+
 The first key found picks the service (or pass `--provider openai|fal|gemini|maxgent`, and `--model` to change the model). Slots that already have a photo, such as `turf-replacement`, are skipped unless you pass `--force`. Once a slot has a photo, its alt text comes from `photo-prompts.js`. AI images are illustrative: do not present them as the client's completed projects, and replace them with real project photos when available.
 
 ## Images
