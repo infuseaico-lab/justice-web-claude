@@ -484,7 +484,6 @@ const VALUES = [
     </div>
     <div class="hero-media">
       <div class="frame">${img('hero-home', 'Illustration of an energy-efficient home with an outdoor heat pump, warm LED-lit windows and a water-wise front yard', { eager: true })}</div>
-      <div class="hero-badge">${ico('bolt', 'ico--navy')}<div><strong>One team for your whole home</strong><span>Water heating, HVAC, water, turf &amp; lighting</span></div></div>
     </div>
   </div>
 </section>
@@ -582,7 +581,6 @@ ${pageHero({
   lead: 'From the water heater in your garage to the lawn out front, we help you upgrade the systems that use the most energy and water, with clear options for each one.',
   image: 'services-cutaway',
   alt: 'Cutaway illustration of a home showing a water heater, mini-split heat pump, efficient bathroom fixtures, LED kitchen lighting and a water-wise yard',
-  badge: { icon: 'layers', title: '5 service areas', text: 'Each with its own guide and FAQs' },
 })}
 <section class="section" aria-labelledby="all-services">
   <div class="container">
