@@ -34,11 +34,13 @@ module.exports = {
   openingHours: ['Mo-Fr 08:30-17:00'],
   license: '', // TODO: e.g. 'CSLB #1234567' — shown in the footer when set
   // Trust bar under the home page hero. Fill in only figures the client has confirmed; an empty
-  // value hides its item, and the stars show only once a rating is set. A set `license` adds "Licensed".
+  // value hides its item, and the stars show only once a rating is set.
   trust: {
     googleRating: '', // TODO: e.g. '4.9'
     googleReviews: '', // TODO: e.g. '127'
-    yearFounded: '', // TODO: e.g. '2014'
+    licensedInsured: true, // shows "Licensed & insured" (a set `license` shows "Licensed" on its own)
+    yearFounded: '2001',
+    foundedArea: 'Los Angeles & Orange Counties', // "Since 2001 / in …"
   },
   // Shown in the top bar above the header.
   topbarText: 'Serving Los Angeles and Orange Counties',

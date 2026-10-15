@@ -429,11 +429,11 @@ function trustBar() {
   const items = [
     t.googleRating && { value: `${t.googleRating}<span class="trust-star" aria-hidden="true">★</span>`, label: 'Google rating', sr: `${t.googleRating} out of 5` },
     t.googleReviews && { value: esc(t.googleReviews), label: 'Google reviews' },
-    site.license && { value: 'Licensed', label: esc(site.license) },
+    (t.licensedInsured || site.license) && { value: 'Licensed', label: t.licensedInsured ? '&amp; insured' : esc(site.license) },
     site.address.city && { value: 'Local office', label: `in ${esc(site.address.city)}` },
-    t.yearFounded && { value: `Since ${esc(t.yearFounded)}`, label: `in ${esc(site.serviceArea)}` },
+    t.yearFounded && { value: `Since ${esc(t.yearFounded)}`, label: `in ${esc(t.foundedArea || site.serviceArea)}` },
     { value: `${programs.length} programs`, label: 'we work with' },
-    { value: 'LA &amp; Orange', label: 'Counties served' },
+    !t.foundedArea && { value: 'LA &amp; Orange', label: 'Counties served' },
   ]
     .filter(Boolean)
     .slice(0, 5);
