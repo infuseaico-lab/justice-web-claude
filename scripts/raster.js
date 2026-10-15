@@ -17,6 +17,10 @@ const IMG = path.join(ROOT, 'src/assets/img');
 const OG = path.join(ROOT, 'src/assets/og');
 const STATIC = path.join(ROOT, 'src/static');
 fs.mkdirSync(OG, { recursive: true });
+const SLOTS_DIR = path.join(ROOT, 'src/assets/slots');
+const PHOTOS = path.join(ROOT, 'src/assets/photos');
+fs.mkdirSync(SLOTS_DIR, { recursive: true });
+const SLOT_IDS = ['hero-home', 'services-cutaway', 'water-heating', 'hvac', 'water-conservation', 'turf-replacement', 'led-lighting', 'programs', 'about', 'contact', 'privacy'];
 
 const services = require('../src/content/services');
 const site = require('../src/site.config');
@@ -70,6 +74,21 @@ function cardHtml(c) {
   await icon(512, path.join(IMG, 'logo.png'));
   const fav = path.join(IMG, '.fav-48.png');
   await icon(48, fav);
+  // Default page photos (4:3): a downloaded photo when there is one, otherwise the drawing.
+  // The admin's uploads replace these on the live site without a rebuild.
+  for (const id of SLOT_IDS) {
+    const big = path.join(SLOTS_DIR, `${id}.jpg`);
+    const small = path.join(SLOTS_DIR, `${id}-800.jpg`);
+    if (fs.existsSync(path.join(PHOTOS, `${id}.jpg`))) {
+      fs.copyFileSync(path.join(PHOTOS, `${id}.jpg`), big);
+      fs.copyFileSync(path.join(PHOTOS, `${id}-800.jpg`), small);
+      continue;
+    }
+    await page.setViewportSize({ width: 1600, height: 1200 });
+    await page.setContent(`<body style="margin:0"><img src="${svgData(id)}" style="display:block;width:1600px;height:1200px"></body>`);
+    await page.screenshot({ path: big, type: 'jpeg', quality: 84 });
+    execFileSync('convert', [big, '-resize', '800x600', '-strip', '-interlace', 'Plane', '-quality', '82', small]);
+  }
   await browser.close();
 
   try {

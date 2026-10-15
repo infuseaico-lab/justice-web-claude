@@ -42,10 +42,10 @@ module.exports = {
   },
 
   form: {
-    // Where the consultation form posts. Leave empty to use Netlify Forms
-    // (works automatically when the site is deployed on Netlify).
-    // For other hosts set this to a Formspree / Web3Forms / Basin endpoint URL.
-    endpoint: '',
+    // The consultation form posts to the PHP handler included with the site (cPanel hosting).
+    // Requests are emailed to `to` and also listed in the admin under "Consultation requests".
+    endpoint: '/contact.php',
+    to: 'info@justiceenergyco.com',
     name: 'consultation',
   },
 

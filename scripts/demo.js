@@ -11,7 +11,7 @@ const path = require('path');
 
 const DIST = path.join(__dirname, '..', 'dist');
 const OUT = path.resolve(process.argv[2] || path.join(__dirname, '..', 'demo'));
-const SKIP = new Set(['.htaccess', '_headers', '_redirects']);
+const SKIP = new Set(['.htaccess', '_headers', '_redirects', 'slots.json']);
 
 const BANNER = `<div role="note" style="background:#f6b941;color:#081a29;font:600 14px/1.4 Inter,system-ui,sans-serif;text-align:center;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))">Design preview prepared by Infuse AI for Justice Energy Co. Not the live website: the form does not send.</div>`;
 
@@ -24,7 +24,8 @@ function walk(dir, base = '') {
 
 function mapUrl(url, depth) {
   const m = url.match(/^([^?#]*)(\?[^#]*)?(#.*)?$/);
-  let p = m[1];
+  // Page photos are served by .htaccess on the live site; the preview uses the defaults directly.
+  let p = m[1].replace(/^img\/slot\//, 'assets/slots/');
   if (p === '') p = 'home.html';
   else if (p.endsWith('/')) p += 'index.html';
   return '../'.repeat(depth) + p + (m[2] || '') + (m[3] || '');
@@ -34,6 +35,7 @@ function rewrite(html, rel) {
   const depth = rel.split('/').length - 1;
   return html
     .replace(/(href|src|action|data-success)="\/([^"]*)"/g, (_, attr, url) => `${attr}="${mapUrl(url, depth)}"`)
+    .replace(/srcset="([^"]*)"/g, (_, set) => `srcset="${set.replace(/\/(img\/slot\/[^\s,]+)/g, (__, u) => mapUrl(u, depth))}"`)
     .replace(/<meta name="robots" content="[^"]*">/, '<meta name="robots" content="noindex, nofollow">')
     .replace(/ data-netlify="true" netlify-honeypot="bot-field"/, ' data-demo')
     .replace('<body>', `<body>\n${BANNER}`);
@@ -41,10 +43,19 @@ function rewrite(html, rel) {
 
 fs.rmSync(OUT, { recursive: true, force: true });
 for (const rel of walk(DIST)) {
-  if (SKIP.has(path.basename(rel))) continue;
+  if (SKIP.has(path.basename(rel)) || rel.startsWith('admin/')) continue;
   const src = path.join(DIST, rel);
   const dest = path.join(OUT, rel);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
+  if (rel.endsWith('.php')) {
+    // PHP does not run in the preview: the gallery page is shown in its empty state, the admin is left out.
+    if (rel !== 'gallery/index.php') continue;
+    let html = fs.readFileSync(src, 'utf8');
+    const empty = html.match(/<!--gallery:empty-->([\s\S]*?)<!--\/gallery:empty-->/)[1];
+    html = html.replace(/<!--gallery:php-->[\s\S]*?<!--\/gallery:php-->/, empty);
+    fs.writeFileSync(dest.replace(/index\.php$/, 'index.html'), rewrite(html, rel.replace(/index\.php$/, 'index.html')));
+    continue;
+  }
   if (rel.endsWith('.html')) fs.writeFileSync(dest, rewrite(fs.readFileSync(src, 'utf8'), rel));
   else fs.copyFileSync(src, dest);
 }

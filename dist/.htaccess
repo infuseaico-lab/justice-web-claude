@@ -1,15 +1,22 @@
-# Apache / cPanel hosting configuration
+# Apache / cPanel configuration for the Justice Energy Co. website
 Options -Indexes
-DirectoryIndex index.html
+DirectoryIndex index.php index.html
 ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
   # Force HTTPS and the bare domain
   RewriteCond %{HTTPS} off [OR]
   RewriteCond %{HTTP_HOST} ^www\. [NC]
   RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
   RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # Page photos: serve the photo uploaded in the admin when there is one,
+  # otherwise the default that ships with the site.
+  RewriteCond %{DOCUMENT_ROOT}/uploads/slots/$1 -f
+  RewriteRule ^img/slot/([a-z0-9-]+\.jpg)$ uploads/slots/$1 [L]
+  RewriteRule ^img/slot/([a-z0-9-]+\.jpg)$ assets/slots/$1 [L]
 
   # Old URLs -> new URLs (add more during content migration)
   RewriteRule ^contact-us/?$ /contact/ [R=301,L]
@@ -21,19 +28,24 @@ ErrorDocument 404 /404.html
   RewriteRule ^led-lighting/?$ /services/led-lighting-retrofits/ [R=301,L]
   RewriteRule ^turf-replacement/?$ /services/turf-replacement/ [R=301,L]
   RewriteRule ^water-conservation/?$ /services/water-conservation/ [R=301,L]
+  RewriteRule ^gallery\.html$ /gallery/ [R=301,L]
 </IfModule>
 
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
+  # Versioned assets never change; photos can be replaced in the admin, so they revalidate.
   <FilesMatch "\.(css|js|svg|png|ico|webmanifest)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(jpe?g)$">
+    Header set Cache-Control "public, max-age=300, must-revalidate"
   </FilesMatch>
 </IfModule>
 
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/xml text/plain application/manifest+json
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/xml text/plain application/manifest+json application/json
 </IfModule>
 
 AddType image/svg+xml .svg

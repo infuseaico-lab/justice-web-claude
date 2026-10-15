@@ -1,0 +1,57 @@
+[
+  {
+    "id": "hero-home",
+    "label": "Home page, main photo",
+    "usedOn": "Home page (top), About page (service area)"
+  },
+  {
+    "id": "services-cutaway",
+    "label": "Services overview",
+    "usedOn": "Services page (top)"
+  },
+  {
+    "id": "water-heating",
+    "label": "Water heating",
+    "usedOn": "Water heating page, service cards"
+  },
+  {
+    "id": "hvac",
+    "label": "HVAC & heat pumps",
+    "usedOn": "HVAC & heat pumps page, service cards"
+  },
+  {
+    "id": "water-conservation",
+    "label": "Water conservation",
+    "usedOn": "Water conservation page, service cards"
+  },
+  {
+    "id": "turf-replacement",
+    "label": "Turf replacement",
+    "usedOn": "Turf replacement page, service cards"
+  },
+  {
+    "id": "led-lighting",
+    "label": "LED lighting",
+    "usedOn": "LED lighting page, service cards"
+  },
+  {
+    "id": "programs",
+    "label": "Programs",
+    "usedOn": "Programs page (top), programs sections on the home and service pages"
+  },
+  {
+    "id": "about",
+    "label": "About",
+    "usedOn": "About page (top), home page (about section)"
+  },
+  {
+    "id": "contact",
+    "label": "Contact & call to action",
+    "usedOn": "Call-to-action banners on every page, thank-you page"
+  },
+  {
+    "id": "privacy",
+    "label": "Privacy policy",
+    "usedOn": "Privacy policy page"
+  }
+]

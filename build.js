@@ -82,19 +82,27 @@ const brand = () =>
   `<a class="brand" href="/" aria-label="${esc(site.name)} — home">${LOGO}<span class="brand-text"><strong>Justice Energy</strong><span>Co.</span></span></a>`;
 
 /* ---------- images ---------- */
-// Photographs live in src/assets/photos as <slot>.jpg (1600×1200) and <slot>-800.jpg (800×600),
-// fetched by scripts/fetch-photos.js. A slot without a photo falls back to its drawing.
-const photos = Object.fromEntries(require('./src/content/photos').map((p) => [p.slot, p]));
-const hasPhoto = (name) => fs.existsSync(path.join(SRC, 'assets', 'photos', `${name}.jpg`));
+// Every photo on the site sits in a named slot served from /img/slot/<slot>.jpg. The server
+// (.htaccess) returns the photo uploaded in the admin when there is one, and the default in
+// /assets/slots/ otherwise, so the admin can replace a photo without rebuilding the site.
+const SLOTS = [
+  { id: 'hero-home', label: 'Home page, main photo', usedOn: 'Home page (top), About page (service area)' },
+  { id: 'services-cutaway', label: 'Services overview', usedOn: 'Services page (top)' },
+  { id: 'water-heating', label: 'Water heating', usedOn: 'Water heating page, service cards' },
+  { id: 'hvac', label: 'HVAC & heat pumps', usedOn: 'HVAC & heat pumps page, service cards' },
+  { id: 'water-conservation', label: 'Water conservation', usedOn: 'Water conservation page, service cards' },
+  { id: 'turf-replacement', label: 'Turf replacement', usedOn: 'Turf replacement page, service cards' },
+  { id: 'led-lighting', label: 'LED lighting', usedOn: 'LED lighting page, service cards' },
+  { id: 'programs', label: 'Programs', usedOn: 'Programs page (top), programs sections on the home and service pages' },
+  { id: 'about', label: 'About', usedOn: 'About page (top), home page (about section)' },
+  { id: 'contact', label: 'Contact & call to action', usedOn: 'Call-to-action banners on every page, thank-you page' },
+  { id: 'privacy', label: 'Privacy policy', usedOn: 'Privacy policy page' },
+];
 function img(name, alt, { eager = false, sizes = '(min-width: 1024px) 50vw, 100vw' } = {}) {
   const loading = eager ? ' fetchpriority="high"' : ' loading="lazy"';
-  if (hasPhoto(name)) {
-    const photoAlt = (photos[name] && photos[name].alt) || alt;
-    return `<img src="/assets/photos/${name}.jpg" srcset="/assets/photos/${name}-800.jpg 800w, /assets/photos/${name}.jpg 1600w" sizes="${sizes}" alt="${esc(photoAlt)}" width="1600" height="1200"${loading} decoding="async">`;
-  }
-  return `<img src="/assets/img/${name}.svg" alt="${esc(alt)}" width="1200" height="900"${loading} decoding="async">`;
+  return `<img src="/img/slot/${name}.jpg" srcset="/img/slot/${name}-800.jpg 800w, /img/slot/${name}.jpg 1600w" sizes="${sizes}" alt="${esc(alt)}" width="1600" height="1200"${loading} decoding="async">`;
 }
-const imgUrl = (name) => (hasPhoto(name) ? `/assets/photos/${name}.jpg` : `/assets/img/${name}.svg`);
+const imgUrl = (name) => `/img/slot/${name}.jpg`;
 
 /* ---------- schema ---------- */
 function businessSchema() {
@@ -213,6 +221,7 @@ function header(page) {
           <ul class="sub" id="sub-services">${subItems}<li><a class="sub-all" href="/services/">View all services →</a></li></ul>
         </li>
         <li><a href="/programs/"${cur('/programs/')}>Programs</a></li>
+        <li><a href="/gallery/"${cur('/gallery/')}>Gallery</a></li>
         <li><a href="/about/"${cur('/about/')}>About</a></li>
         <li><a href="/contact/"${cur('/contact/')}>Contact</a></li>
       </ul>
@@ -255,6 +264,7 @@ function footer() {
         <li><a href="/about/">About us</a></li>
         <li><a href="/services/">All services</a></li>
         <li><a href="/programs/">Programs</a></li>
+        <li><a href="/gallery/">Gallery</a></li>
         <li><a href="/contact/">Request a consultation</a></li>
         <li><a href="/privacy-policy/">Privacy policy</a></li>
       </ul>
@@ -1068,15 +1078,108 @@ addPage(
 </section>`
 );
 
+/* Gallery — a PHP page so photos uploaded in the admin appear immediately. */
+(function gallery() {
+  const crumbs = [{ name: 'Home', href: '/' }, { name: 'Gallery', href: '/gallery/' }];
+  const categories = Object.fromEntries([...services.map((s) => [s.slug, s.name]), ['other', 'Other projects']]);
+  const empty = `<div class="gallery-empty">
+      <h2>Project photos are on the way</h2>
+      <p>We are adding photos of recent upgrades. In the meantime, explore our services or request a consultation to talk about your home.</p>
+      <div class="btn-row" style="justify-content:center"><a class="btn btn-primary" href="/services/">Explore services ${icon('arrow')}</a><a class="btn btn-outline" href="/contact/">Request a consultation</a></div>
+    </div>`;
+  const body = `
+${pageHero({
+  crumbs,
+  eyebrow: 'Gallery',
+  h1: 'Our work, up close',
+  lead: 'Photos of energy-efficiency upgrades from homes across Southern California: water heaters, heat pumps, water-saving fixtures, water-wise yards and LED lighting.',
+  cta: false,
+})}
+<section class="section" style="padding-top:0" aria-label="Project photos">
+  <div class="container">
+<!--gallery:php-->
+<?php
+$items = json_decode((string) @file_get_contents(__DIR__ . '/../uploads/gallery.json'), true);
+if (!is_array($items)) { $items = []; }
+$cats = ${JSON.stringify(categories).replace(/^\{/, '[').replace(/\}$/, ']').replace(/":/g, '" =>')};
+$h = function ($v) { return htmlspecialchars((string) $v, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); };
+$present = array_map(function ($i) { return (string) ($i['category'] ?? ''); }, $items);
+$used = array_values(array_filter(array_keys($cats), function ($c) use ($present) { return in_array($c, $present, true); }));
+?>
+<?php if (!$items): ?>
+<!--gallery:empty-->${empty}<!--/gallery:empty-->
+<?php else: ?>
+    <?php if (count($used) > 1): ?>
+    <div class="gallery-filters" role="group" aria-label="Show photos by service">
+      <button type="button" class="pill is-active" data-filter="" aria-pressed="true">All photos</button>
+      <?php foreach ($used as $c): ?><button type="button" class="pill" data-filter="<?= $h($c) ?>" aria-pressed="false"><?= $h($cats[$c] ?? $c) ?></button><?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+    <ul class="gallery-grid">
+      <?php foreach ($items as $i => $it): $alt = ($it['alt'] ?? '') !== '' ? $it['alt'] : (($it['caption'] ?? '') !== '' ? $it['caption'] : 'Energy-efficiency upgrade project photo'); ?>
+      <li data-category="<?= $h($it['category'] ?? '') ?>">
+        <a class="gallery-item" href="/uploads/gallery/<?= $h($it['file']) ?>" data-lightbox data-caption="<?= $h($it['caption'] ?? '') ?>" data-alt="<?= $h($alt) ?>">
+          <img src="/uploads/gallery/<?= $h($it['thumb']) ?>" alt="<?= $h($alt) ?>" width="<?= (int) $it['w'] ?>" height="<?= (int) $it['h'] ?>"<?= $i < 6 ? '' : ' loading="lazy"' ?> decoding="async">
+          <?php if (($it['caption'] ?? '') !== ''): ?><span class="gallery-cap"><?= $h($it['caption']) ?></span><?php endif; ?>
+        </a>
+      </li>
+      <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+<!--/gallery:php-->
+  </div>
+</section>
+<dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+  <button class="lightbox-close" type="button" data-close aria-label="Close">×</button>
+  <button class="lightbox-nav lightbox-prev" type="button" data-prev aria-label="Previous photo">‹</button>
+  <figure><img alt=""><figcaption></figcaption></figure>
+  <button class="lightbox-nav lightbox-next" type="button" data-next aria-label="Next photo">›</button>
+</dialog>
+${ctaBand({ title: 'Want results like these at home?' })}`;
+  addPage(
+    {
+      path: '/gallery/',
+      file: 'index.php',
+      title: 'Project Gallery',
+      description: `Photos of energy-efficiency upgrades by ${site.name}: heat pump and tankless water heaters, mini-splits, water-saving fixtures, turf replacement and LED lighting.`,
+      og: 'home',
+      priority: '0.7',
+      schema: [breadcrumbSchema(crumbs), { '@type': 'CollectionPage', name: `${site.name} project gallery`, url: abs('/gallery/'), about: { '@id': abs('/#business') } }],
+    },
+    body
+  );
+})();
+
+/* PHP settings for the admin and the contact form, generated from site.config.js. */
+function writePhpConfig() {
+  const php = (v) => `'${String(v).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
+  const arr = (obj) => `[${Object.entries(obj).map(([k, v]) => `${php(k)} => ${php(v)}`).join(', ')}]`;
+  const categories = Object.fromEntries([...services.map((s) => [s.slug, s.name]), ['other', 'Other projects']]);
+  const config = `<?php
+// Generated by build.js from src/site.config.js. Do not edit here; edit the config and rebuild.
+define('JE_SITE_NAME', ${php(site.name)});
+define('JE_SITE_URL', ${php(site.url)});
+define('JE_FORM_TO', ${php(site.form.to || site.email)});
+define('JE_PHONE', ${php(site.phone)});
+define('JE_PHONE_HREF', ${php(site.phoneHref)});
+define('JE_CATEGORIES', ${arr(categories)});
+define('JE_PROGRAMS', ${arr(Object.fromEntries(programs.map((p) => [p.id, p.name])))});
+`;
+  fs.writeFileSync(path.join(DIST, 'admin', 'site-config.php'), config);
+  fs.writeFileSync(path.join(DIST, 'admin', 'slots.json'), JSON.stringify(SLOTS, null, 2) + '\n');
+}
+
 /* ---------- write ---------- */
 function build() {
   fs.rmSync(DIST, { recursive: true, force: true });
   copyDir(path.join(SRC, 'assets'), path.join(DIST, 'assets'));
   copyDir(path.join(SRC, 'static'), DIST);
+  copyDir(path.join(SRC, 'php'), DIST);
+  writePhpConfig();
   const rendered = pages;
 
   for (const p of rendered) {
-    const out = p.path.endsWith('.html') ? path.join(DIST, p.path) : path.join(DIST, p.path, 'index.html');
+    const out = p.path.endsWith('.html') ? path.join(DIST, p.path) : path.join(DIST, p.path, p.file || 'index.html');
     fs.mkdirSync(path.dirname(out), { recursive: true });
     fs.writeFileSync(out, p.html);
   }

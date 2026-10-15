@@ -1,0 +1,12 @@
+# Website admin: only index.php is reachable; data, settings and helpers are private.
+Options -Indexes
+DirectoryIndex index.php
+
+<FilesMatch "^(lib\.php|site-config\.php|slots\.json|.*\.json|.*\.txt)$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow"
+  Header set Cache-Control "no-store"
+</IfModule>

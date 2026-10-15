@@ -63,6 +63,61 @@
     reveal.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
+  /* ---------- Gallery: filters and lightbox ---------- */
+  var grid = document.querySelector('.gallery-grid');
+  if (grid) {
+    var buttons = document.querySelectorAll('.gallery-filters [data-filter]');
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var f = btn.getAttribute('data-filter');
+        buttons.forEach(function (b) { var on = b === btn; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+        grid.querySelectorAll('li').forEach(function (li) { li.hidden = !!f && li.getAttribute('data-category') !== f; });
+      });
+    });
+
+    var box = document.getElementById('lightbox');
+    if (box && typeof box.showModal === 'function') {
+      var boxImg = box.querySelector('img');
+      var boxCap = box.querySelector('figcaption');
+      var current = 0;
+      var visible = function () { return Array.prototype.slice.call(grid.querySelectorAll('li:not([hidden]) [data-lightbox]')); };
+      var show = function (i) {
+        var links = visible();
+        if (!links.length) return;
+        current = (i + links.length) % links.length;
+        var a = links[current];
+        boxImg.src = a.getAttribute('href');
+        boxImg.alt = a.getAttribute('data-alt') || '';
+        boxCap.textContent = a.getAttribute('data-caption') || '';
+        box.querySelectorAll('.lightbox-nav').forEach(function (n) { n.hidden = links.length < 2; });
+      };
+      grid.addEventListener('click', function (e) {
+        var a = e.target.closest('[data-lightbox]');
+        if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+        e.preventDefault();
+        show(visible().indexOf(a));
+        box.showModal();
+      });
+      box.querySelector('[data-close]').addEventListener('click', function () { box.close(); });
+      box.querySelector('[data-prev]').addEventListener('click', function () { show(current - 1); });
+      box.querySelector('[data-next]').addEventListener('click', function () { show(current + 1); });
+      box.addEventListener('click', function (e) { if (e.target === box) box.close(); });
+      box.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') show(current - 1);
+        if (e.key === 'ArrowRight') show(current + 1);
+      });
+      var startX = null;
+      box.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+      box.addEventListener('touchend', function (e) {
+        if (startX === null) return;
+        var dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+        startX = null;
+      });
+      box.addEventListener('close', function () { boxImg.removeAttribute('src'); });
+    }
+  }
+
   /* ---------- Consultation form ---------- */
   var form = document.querySelector('[data-form]');
   if (!form) return;
