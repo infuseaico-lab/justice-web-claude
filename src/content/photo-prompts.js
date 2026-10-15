@@ -28,8 +28,8 @@ module.exports = {
       alt: 'Newly installed heat pump water heater in a clean garage utility area',
     },
     hvac: {
-      prompt: 'Sleek white ductless mini-split indoor unit mounted high on the wall of a bright modern living room, light linen sofa, wood floor, green plants, afternoon sunlight through large windows, calm and comfortable.',
-      alt: 'Ductless mini-split heat pump mounted on the wall of a bright living room',
+      prompt: 'Sleek white ductless mini-split indoor unit mounted high on the wall of a contemporary, design-forward living room: low-profile modular sofa, warm oak floor, minimalist decor, a large abstract artwork, a sculptural floor lamp, green plants, floor-to-ceiling windows with afternoon light. A relaxed adult sits on the sofa cushions, leaning back in the middle of the sofa (not on a bench or ottoman), pointing a small white remote control up at the mini-split and looking at the unit, which is mounted on the wall above and slightly to the side of the sofa. Cool air is clearly visible flowing out of the open louvers: soft white translucent streams of chilled mist fanning out and drifting down across the room toward the sofa, easy to see against the wall, like cold air made visible in a premium air-conditioner advertisement photo.',
+      alt: 'Homeowner on a sofa adjusting a ductless mini-split with a remote as cool air flows into a modern living room',
     },
     'water-conservation': {
       prompt: 'Bright modern bathroom with an efficient chrome showerhead in a glass-enclosed shower, a white vessel sink with a slim water-saving faucet, and a modern white low-flow toilet, light gray tile, natural light, spotless.',
