@@ -337,7 +337,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .trust-items strong { font: 800 clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem)/1.1 var(--font-head); color: var(--ink); letter-spacing: -0.01em; }
 .trust-items li > span { font-size: 0.95rem; color: var(--muted); }
 .trust-star { color: var(--ink); font-size: 0.85em; margin-left: 2px; }
-.trust-stars { margin: clamp(20px, 2.5vw, 28px) 0 0; font-size: 1.6rem; letter-spacing: 0.12em; color: #f5a623; }
+.trust-stars { margin: clamp(20px, 2.5vw, 28px) 0 0; font-size: 1.6rem; letter-spacing: 0.12em; color: #f6b941; }
 .trust-stars a { color: inherit; text-decoration: none; }
 @media (min-width: 768px) {
   .trust-items { flex-wrap: nowrap; }

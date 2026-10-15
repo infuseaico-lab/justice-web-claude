@@ -437,9 +437,10 @@ function trustBar() {
   ]
     .filter(Boolean)
     .slice(0, 5);
+  // With a rating the stars link to the Google profile; without one they lead to the testimonials below.
   const stars = t.googleRating
     ? `<p class="trust-stars">${site.social.google ? `<a href="${esc(site.social.google)}" target="_blank" rel="noopener">` : ''}<span aria-hidden="true">★★★★★</span><span class="sr-only">Rated ${esc(t.googleRating)} out of 5 on Google</span>${site.social.google ? '</a>' : ''}</p>`
-    : '';
+    : `<p class="trust-stars"><a href="#reviews-title"><span aria-hidden="true">★★★★★</span><span class="sr-only">Read what our customers say</span></a></p>`;
   return `<section class="trust" aria-labelledby="trust-title">
   <div class="container" data-reveal>
     <h2 class="trust-title" id="trust-title">Trusted by homeowners across ${esc(site.serviceArea)}</h2>

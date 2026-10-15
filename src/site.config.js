@@ -34,7 +34,7 @@ module.exports = {
   openingHours: ['Mo-Fr 08:30-17:00'],
   license: '', // TODO: e.g. 'CSLB #1234567' — shown in the footer when set
   // Trust bar under the home page hero. Fill in only figures the client has confirmed; an empty
-  // value hides its item, and the stars show only once a rating is set.
+  // value hides its item. The stars always show; with a rating they link to the Google profile.
   trust: {
     googleRating: '', // TODO: e.g. '4.9'
     googleReviews: '', // TODO: e.g. '127'
