@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <title>Project Gallery | Justice Energy Co.</title>
 <meta name="description" content="Photos of energy-efficiency upgrades by Justice Energy Co.: heat pump and tankless water heaters, mini-splits, water-saving fixtures, turf replacement and LED lighting.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://justiceenergyco.com/gallery/">
-<meta name="theme-color" content="#406093">
+<meta name="theme-color" content="#f6b941">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Justice Energy Co.">
 <meta property="og:locale" content="en_US">
@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/css/styles.css?v=e9a70dd4">
+<link rel="stylesheet" href="/assets/css/styles.css?v=26721a69">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://justiceenergyco.com/"},{"@type":"ListItem","position":2,"name":"Gallery","item":"https://justiceenergyco.com/gallery/"}]},{"@type":"CollectionPage","name":"Justice Energy Co. project gallery","url":"https://justiceenergyco.com/gallery/","about":{"@id":"https://justiceenergyco.com/#business"}}]}</script>
 
 </head>

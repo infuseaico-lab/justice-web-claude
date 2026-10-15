@@ -190,12 +190,12 @@ function head(page) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(page.description)}">
 <meta name="robots" content="${page.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}">
 <link rel="canonical" href="${canonical}">
-<meta name="theme-color" content="#406093">
+<meta name="theme-color" content="#f6b941">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${esc(site.name)}">
 <meta property="og:locale" content="en_US">
@@ -906,22 +906,22 @@ ${pageHero({
         <div class="form-grid">
           <div class="field">
             <label for="f-name">Full name *</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-error">
+            <input id="f-name" name="name" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" required aria-describedby="f-name-error">
             ${err('f-name')}
           </div>
           <div class="field">
             <label for="f-email">Email *</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-error">
+            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" autocorrect="off" enterkeyhint="next" required aria-describedby="f-email-error">
             ${err('f-email')}
           </div>
           <div class="field">
             <label for="f-phone">Phone *</label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="f-phone-error">
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" required aria-describedby="f-phone-error">
             ${err('f-phone')}
           </div>
           <div class="field">
             <label for="f-location">Property city or ZIP code *</label>
-            <input id="f-location" name="location" type="text" autocomplete="postal-code" required aria-describedby="f-location-error">
+            <input id="f-location" name="location" type="text" autocomplete="postal-code" enterkeyhint="next" required aria-describedby="f-location-error">
             ${err('f-location')}
           </div>
           <div class="field">
@@ -1220,7 +1220,7 @@ function build() {
         start_url: '/',
         display: 'browser',
         background_color: '#ffffff',
-        theme_color: '#406093',
+        theme_color: '#f6b941',
         icons: [
           { src: '/assets/img/icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: '/assets/img/icon-512.png', sizes: '512x512', type: 'image/png' },
