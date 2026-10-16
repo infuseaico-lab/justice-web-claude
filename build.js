@@ -95,7 +95,10 @@ function socialIcons(cls) {
 function topbar() {
   return `<div class="topbar">
   <div class="container topbar-inner">
-    <p class="topbar-text">${icon('pin')}<span class="long">${esc(site.topbarText)}</span><span class="short">${esc(site.topbarTextShort || site.topbarText)}</span></p>
+    <div class="topbar-info">
+      <p class="topbar-text">${icon('pin')}<span class="long">${esc(site.topbarText)}</span><span class="short">${esc(site.topbarTextShort || site.topbarText)}</span></p>
+      ${site.license ? `<p class="topbar-text topbar-license">${icon('shield')}<span class="long">${esc(site.license)}</span><span class="short">${esc(site.license.replace(/\s*License\s*/i, ' '))}</span></p>` : ''}
+    </div>
     <div class="topbar-social">${socialIcons('topbar-icon')}</div>
   </div>
 </div>`;
@@ -313,7 +316,8 @@ function footer() {
   <div class="container">
     <p class="footer-disclaimer">Program participation, incentive amounts, eligibility and funding availability are set by each program and are not guaranteed. Images on this site are illustrative and do not depict completed client projects.</p>
     <div class="footer-bottom">
-      <p>© ${YEAR} ${esc(site.name)} All rights reserved.${site.license ? ` ${esc(site.license)}` : ''}</p>
+      <p>© ${YEAR} ${esc(site.name)} All rights reserved.</p>
+      ${site.license ? `<p>${esc(site.license)}</p>` : ''}
       <p><a href="/privacy-policy/">Privacy policy</a> · <a href="/sitemap.xml" target="_blank" rel="noopener">Sitemap</a></p>
     </div>
   </div>

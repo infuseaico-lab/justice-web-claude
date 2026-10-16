@@ -670,6 +670,8 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
 .topbar-text { display: flex; align-items: center; gap: 8px; margin: 0; }
 .topbar-text svg { width: 16px; height: 16px; flex: none; }
 .topbar-text .short { display: none; }
+.topbar-info { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 20px; min-width: 0; }
+.topbar-license { padding-left: 20px; border-left: 1px solid rgba(22, 36, 59, 0.25); }
 .topbar-social { display: flex; align-items: center; gap: 4px; }
 .topbar-icon { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; color: #16243b; transition: background-color 0.2s, color 0.2s; }
 .topbar-icon svg { width: 16px; height: 16px; }
@@ -683,6 +685,15 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
   .topbar-text .long { display: none; }
   .topbar-text .short { display: inline; }
   .topbar-icon { width: 30px; height: 30px; }
+  .topbar-info { gap: 2px 12px; padding-block: 6px; }
+  .topbar-license { padding-left: 0; border-left: 0; }
+  .topbar-text { min-width: 0; }
+  .topbar-text span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+@media (max-width: 379px) {
+  .topbar-inner { gap: 8px; }
+  .topbar-social { gap: 0; }
+  .topbar-icon { width: 28px; height: 28px; }
 }
 /* A backdrop filter would trap the fixed menu drawer inside the header; drop it while the menu is open. */
 body.nav-open .site-header { -webkit-backdrop-filter: none; backdrop-filter: none; background: #fff; }

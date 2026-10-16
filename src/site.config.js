@@ -32,7 +32,7 @@ module.exports = {
   hoursClosed: 'Sat & Sun closed',
   // schema.org openingHours format; set to [] to omit.
   openingHours: ['Mo-Fr 08:30-17:00'],
-  license: '', // TODO: e.g. 'CSLB #1234567' — shown in the footer when set
+  license: 'CSLB License #1007786', // shown in the top bar and footer
   // Trust bar under the home page hero. Fill in only figures the client has confirmed; an empty
   // value hides its item. The stars always show; with a rating they link to the Google profile.
   trust: {
