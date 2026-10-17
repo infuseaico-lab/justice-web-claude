@@ -53,7 +53,7 @@ body {
   color: var(--body);
   font-family: var(--font-body);
   font-size: 1.0625rem;
-  line-height: 1.65;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -99,8 +99,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   margin-bottom: 14px;
-  color: var(--teal-700); font-family: var(--font-head); font-size: 0.8125rem; font-weight: 700;
+  color: var(--teal-700); font-family: var(--font-head); font-size: 0.8125rem; font-weight: 700; line-height: 1.35;
   letter-spacing: 0.12em; text-transform: uppercase;
+}
+/* Phones: small titles stay within two lines, even with enlarged text (the size is capped by the screen width). */
+@media (max-width: 639px) {
+  .eyebrow { font-size: min(0.8125rem, 3.4vw); letter-spacing: 0.1em; }
+  .eyebrow::before { width: 22px; }
 }
 .eyebrow::before { content: ''; width: 28px; height: 3px; border-radius: 3px; background: var(--teal-600); }
 .lead { font-size: clamp(1.075rem, 1rem + 0.35vw, 1.25rem); color: var(--body); max-width: 62ch; }
@@ -351,7 +356,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Trust bar under the home page hero */
 .trust { padding-block: clamp(8px, 2vw, 24px) clamp(32px, 4vw, 56px); text-align: center; }
-.trust-title { margin: 0 0 clamp(20px, 2.5vw, 28px); font: 700 clamp(0.8rem, 0.75rem + 0.3vw, 0.95rem)/1.4 var(--font-head); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.trust-title { margin: 0 0 clamp(20px, 2.5vw, 28px); font: 700 min(clamp(0.8rem, 0.75rem + 0.3vw, 0.95rem), 3.4vw)/1.35 var(--font-head); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 /* Phones: two columns, or one when the visitor's text size is enlarged (the minimum is in rem, so it grows with it). */
 .trust-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: 24px 12px; margin: 0; padding: 0; list-style: none; }
 .trust-items li { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
@@ -807,7 +812,7 @@ a, button, summary, label, [role='button'], input[type='checkbox'] { touch-actio
 }
 .testimonial-mark { display: block; height: 0.55em; margin-bottom: 18px; font: 700 5rem/1 Georgia, 'Times New Roman', serif; color: var(--amber-500); }
 .testimonial blockquote { flex: 1; margin: 0 0 24px; }
-.testimonial blockquote p { margin: 0; color: var(--ink); font-size: 1.0625rem; line-height: 1.6; }
+.testimonial blockquote p { margin: 0; color: var(--ink); font-size: 1.0625rem; line-height: 1.5; }
 .testimonial figcaption { display: flex; align-items: center; gap: 14px; }
 .testimonial-avatar {
   display: grid; place-items: center; flex: none; width: 48px; height: 48px; border-radius: 50%;
