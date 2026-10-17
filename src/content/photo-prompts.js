@@ -55,8 +55,8 @@ module.exports = {
       alt: 'Technician in a navy work shirt shaking hands with a smiling homeowner in front of a house',
     },
     contact: {
-      prompt: 'Smiling young Caucasian woman with dark brown hair, working as a customer-service representative, dressed for summer in a light, airy short-sleeve white linen blouse, wearing a light headset at a bright, tidy office desk, talking on a call while taking notes, a desktop computer monitor on a stand with a wireless keyboard in front of her (no laptop), plants and natural summer light in the background, candid.',
-      alt: 'Customer-service representative on a call at a bright office desk',
+      prompt: 'Smiling young Caucasian woman with dark brown hair, working as a customer-service representative, dressed for summer in a light, airy short-sleeve white linen blouse, wearing a light headset at a bright, tidy office desk, talking on a call while typing on a wireless keyboard with both hands on the keys, looking at a desktop computer monitor on a stand (no laptop, no notepad, no pen), plants in the background, bright clean neutral daylight with accurate white balance, crisp whites and cool-neutral tones, no yellow or warm color cast, candid.',
+      alt: 'Customer-service representative on a headset call, typing at a computer in a bright office',
     },
     privacy: {
       prompt: 'Closed laptop and a notebook on a tidy light-wood home-office desk with a small plant and a cup of coffee, soft morning daylight, minimal and calm.',
