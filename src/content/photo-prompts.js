@@ -19,6 +19,7 @@ module.exports = {
     'hero-home': {
       prompt: 'Modern single-story Southern California home on a sunny afternoon: white stucco walls with warm wood accents, large windows, a drought-tolerant front yard with succulents, ornamental grasses and decomposed granite, a compact outdoor heat pump unit neatly installed beside the house, clear blue sky.',
       alt: 'Modern Southern California home with a drought-tolerant front yard and an outdoor heat pump on a sunny day',
+      focus: '80% center', // keep the outdoor heat pump in view when the desktop hero crops the sides
     },
     'services-cutaway': {
       prompt: 'Professional HVAC technician in a navy work shirt installing an outdoor heat pump unit beside a modern stucco home, the unit a realistic single-fan design with one round fan grille on its front face and plain side panels, organized tools on a mat, friendly and competent, mid-morning sun, technician seen from the side, not looking at the camera.',
