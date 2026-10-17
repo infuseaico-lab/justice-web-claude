@@ -61,13 +61,13 @@
         <li><a href="/contact/">Contact</a></li>
       </ul>
       <div class="nav-mobile-cta">
-        <a class="btn btn-accent btn-lg" href="/contact/">Request a consultation</a>
+        <a class="btn btn-accent btn-lg" href="/contact/">Get a consultation</a>
         <a class="btn btn-call btn-lg" href="tel:+18665048989"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> Call (866) 504-8989</a>
       </div>
     </nav>
     <div class="header-actions">
       <a class="header-phone" href="tel:+18665048989" aria-label="Call (866) 504-8989"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span>(866) 504-8989</span></a>
-      <a class="btn btn-accent btn-sm" href="/contact/">Request a consultation</a>
+      <a class="btn btn-accent btn-sm" href="/contact/">Get a consultation</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="bars"></span><span class="sr-only">Open menu</span></button>
     </div>
   </div>
@@ -104,7 +104,7 @@ $used = array_values(array_filter(array_keys($cats), function ($c) use ($present
 <!--gallery:empty--><div class="gallery-empty">
       <h2>Project photos are on the way</h2>
       <p>We are adding photos of recent upgrades. In the meantime, explore our services or request a consultation to talk about your home.</p>
-      <div class="btn-row" style="justify-content:center"><a class="btn btn-primary" href="/services/">Explore services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-accent" href="/contact/">Request a consultation</a></div>
+      <div class="btn-row" style="justify-content:center"><a class="btn btn-primary" href="/services/">Explore services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-accent" href="/contact/">Get a consultation</a></div>
     </div><!--/gallery:empty-->
 <?php else: ?>
     <?php if (count($used) > 1): ?>
@@ -141,7 +141,7 @@ $used = array_values(array_filter(array_keys($cats), function ($c) use ($present
         <h2 id="cta-title">Want results like these at home?</h2>
         <p>Tell us about your property and the upgrades you have in mind. We will follow up to talk through options, next steps and programs that may apply.</p>
         <div class="btn-row">
-          <a class="btn btn-accent btn-lg" href="/contact/">Request a consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-accent btn-lg" href="/contact/">Get a consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn btn-call btn-lg" href="tel:+18665048989"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> (866) 504-8989</a>
         </div>
       </div>
