@@ -283,8 +283,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .hero h1 .hl { color: var(--teal-700); }
 .hero .lead { margin-bottom: 28px; }
 .hero-points { display: flex; flex-wrap: wrap; gap: 10px 22px; list-style: none; padding: 0; margin: 28px 0 0; }
-.hero-points li { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--ink); font-size: 0.95rem; }
-.hero-points svg { width: 20px; height: 20px; color: var(--teal-600); }
+.hero-points li { display: inline-flex; align-items: flex-start; gap: 8px; font-weight: 600; color: var(--ink); font-size: 0.95rem; }
+.hero-points svg { flex: none; width: 20px; height: 20px; margin-top: 1px; color: var(--teal-600); }
 .hero-media { position: relative; }
 .hero-media .frame {
   position: relative; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg);
@@ -360,9 +360,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
 @media (hover: hover) and (pointer: fine) { .card:hover .card-media img { transform: scale(1.04); } }
 .card-body { display: flex; flex-direction: column; flex: 1; padding: 24px; }
 .card-body .ico { margin-bottom: 14px; }
-.card-body h3 { margin-bottom: 8px; }
-.card-body h3 a { color: inherit; text-decoration: none; }
-.card-body h3 a::after { content: ''; position: absolute; inset: 0; }
+/* Service cards use an h2 on the Services page and an h3 elsewhere; both look and click the same. */
+.card-body :is(h2, h3) { margin-bottom: 8px; }
+.card-body h2 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+.card-body :is(h2, h3) a { color: inherit; text-decoration: none; }
+.card-body :is(h2, h3) a::after { content: ''; position: absolute; inset: 0; }
 .card-body p { color: var(--muted); font-size: 0.975rem; }
 .card-body .text-link { margin-top: auto; }
 .card--feature { background: linear-gradient(160deg, var(--navy-900), var(--navy-700)); border: 0; color: #d7e1f0; justify-content: center; }
@@ -439,6 +441,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .program p { color: var(--body); }
 .program .pills { margin-bottom: 20px; }
 .program .btn { margin-top: auto; align-self: flex-start; }
+/* Long program names ("Ask about TECH Clean California") must wrap on small phones instead of widening the card. */
+.program-grid > * { min-width: 0; }
+.program .btn { max-width: 100%; white-space: normal; text-align: left; }
 .program-label { display: block; margin-bottom: 8px; font-size: 0.8125rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
 
 /* ---------- FAQ ---------- */
@@ -583,6 +588,14 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
 @media (hover: hover) and (pointer: fine) { .site-footer a:hover { color: var(--amber-500); text-decoration: underline; } }
 .footer-contact li { display: flex; gap: 10px; align-items: flex-start; }
 .footer-contact svg { flex: none; width: 18px; height: 18px; margin-top: 4px; color: var(--teal-500); }
+/* Comfortable tap targets for footer links on touch screens. */
+@media (max-width: 767px) {
+  .site-footer ul:not(.footer-contact) { gap: 0; }
+  .site-footer ul:not(.footer-contact) a { display: block; padding-block: 10px; }
+  .footer-contact { gap: 4px; }
+  .footer-contact a { display: inline-block; padding-block: 8px; margin-block: -8px; }
+  .footer-bottom a { display: inline-block; padding-block: 10px; margin-block: -10px; }
+}
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding-block: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; }
 .footer-bottom p { margin: 0; }
 .footer-disclaimer { padding-bottom: 24px; font-size: 0.8125rem; color: #8797b0; max-width: 900px; }
@@ -690,10 +703,18 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
   .topbar-text { min-width: 0; }
   .topbar-text span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }
-@media (max-width: 379px) {
-  .topbar-inner { gap: 8px; }
+@media (max-width: 389px) {
+  .topbar { font-size: 0.75rem; }
+  .topbar-inner { gap: 6px; }
+  .topbar-text { gap: 6px; }
+  .topbar-text svg { width: 14px; height: 14px; }
   .topbar-social { gap: 0; }
-  .topbar-icon { width: 28px; height: 28px; }
+  .topbar-icon { width: 26px; height: 26px; }
+  .topbar-icon svg { width: 15px; height: 15px; }
+}
+/* The smallest phones keep the service area and license readable; the social icons stay in the footer. */
+@media (max-width: 345px) {
+  .topbar-social { display: none; }
 }
 /* A backdrop filter would trap the fixed menu drawer inside the header; drop it while the menu is open. */
 body.nav-open .site-header { -webkit-backdrop-filter: none; backdrop-filter: none; background: #fff; }
