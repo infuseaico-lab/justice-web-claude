@@ -361,7 +361,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .values--overlap .value { box-shadow: var(--shadow); border-color: transparent; }
 
 /* Trust bar under the home page hero */
-.trust { padding-block: clamp(8px, 2vw, 24px) clamp(32px, 4vw, 56px); text-align: center; }
+.trust { padding-block: clamp(8px, 2vw, 24px) 0; text-align: center; }
+/* A divider under the trust bar, with equal space above it and above the next section's content. */
+.trust .container::after { content: ''; display: block; height: 1px; margin-top: clamp(32px, 4vw, 56px); background: var(--line); }
+.trust + .section { padding-top: clamp(32px, 4vw, 56px); }
 .trust-title { margin: 0 0 clamp(20px, 2.5vw, 28px); font: 700 min(clamp(0.8rem, 0.75rem + 0.3vw, 0.95rem), 3.4vw)/1.35 var(--font-head); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 /* Phones: two columns, or one when the visitor's text size is enlarged (the minimum is in rem, so it grows with it). */
 .trust-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: 24px 12px; margin: 0; padding: 0; list-style: none; }
