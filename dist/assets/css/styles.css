@@ -407,6 +407,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .card--feature h3 { color: #fff; font-size: 1.5rem; }
 .card--feature p { color: #c8d5ea; }
 .card--feature .btn { align-self: flex-start; position: relative; z-index: 1; }
+/* Consultation and call buttons stacked at one shared width (the wider of the two). */
+.feature-actions { display: grid; grid-template-columns: max-content; gap: 12px; align-self: flex-start; position: relative; z-index: 1; }
+.feature-actions .btn { width: 100%; }
+@media (max-width: 639px) { .feature-actions { grid-template-columns: 1fr; align-self: stretch; } }
 
 .option { padding: 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); }
 .option .ico { margin-bottom: 18px; }

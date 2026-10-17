@@ -408,7 +408,10 @@ function featureCard() {
     <div class="card-body">
       <h3>Not sure where to start?</h3>
       <p>Tell us about your home and goals. We will help you prioritize upgrades and point out programs that may apply.</p>
-      <a class="btn btn-accent" href="/contact/">Get a consultation</a>
+      <div class="feature-actions">
+        <a class="btn btn-accent" href="/contact/">Get a consultation</a>
+        <a class="btn btn-call" href="tel:${site.phoneHref}">${icon('phone')} ${esc(site.phone)}</a>
+      </div>
     </div>
   </article>`;
 }
