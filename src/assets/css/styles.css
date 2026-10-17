@@ -125,6 +125,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
    and the box around it, past the edge of the screen. */
 @media (max-width: 639px) {
   .btn { max-width: 100%; white-space: normal; text-align: center; }
+  /* Phones: every button spans its container, one per row, at one size, so stacks line up edge to edge. */
+  .btn, .btn-sm, .btn-lg { width: 100%; min-height: 52px; padding: 12px 20px; font-size: 1rem; }
+  .btn-row { flex-direction: column; align-items: stretch; }
+  .btn-row[style] { justify-content: flex-start !important; }
+  .card--feature .btn, .program .btn { align-self: stretch; }
 }
 .hero-grid > *, .split > *, .cta-card > *, .cards > *, .info-item > * { min-width: 0; }
 .eyebrow { max-width: 100%; }
@@ -556,6 +561,7 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
 .hp-field { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
 .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 8px; }
 .form-actions .btn { min-width: 240px; }
+@media (max-width: 639px) { .form-actions .btn { min-width: 0; } }
 .form-status { margin-top: 18px; }
 .form-status:empty { display: none; }
 .form-status .notice--error { background: #fdecea; color: var(--red-700); }
@@ -617,7 +623,7 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
 @media (max-width: 767px) {
   .action-bar {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
-    display: grid; grid-template-columns: 1fr 1.4fr; gap: 10px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
     padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
     background: rgba(255, 255, 255, 0.96); border-top: 1px solid var(--line);
     -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
@@ -625,6 +631,10 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
     transition: transform 0.25s var(--ease);
   }
   .action-bar .btn { min-height: 46px; padding: 10px 12px; font-size: 0.95rem; }
+}
+@media (max-width: 359px) {
+  .action-bar { gap: 8px; padding-inline: 8px; }
+  .action-bar .btn { padding-inline: 6px; gap: 6px; font-size: 0.875rem; }
   body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
   body.nav-open .action-bar { transform: translateY(110%); }
 }
