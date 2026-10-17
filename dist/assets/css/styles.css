@@ -297,6 +297,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .hero-grid { position: relative; display: grid; gap: clamp(32px, 5vw, 64px); align-items: center; }
 .hero h1 { margin-bottom: 20px; }
 .hero h1 .hl { color: var(--teal-700); }
+/* Phones: the home headline sizes to the screen width so it always sets in three lines. */
+@media (max-width: 639px) {
+  .home-title { font-size: 7.1vw; line-height: 1.12; }
+}
 .hero .lead { margin-bottom: 28px; }
 .hero-points { display: flex; flex-wrap: wrap; gap: 10px 22px; list-style: none; padding: 0; margin: 28px 0 0; }
 .hero-points li { display: inline-flex; align-items: flex-start; gap: 8px; font-weight: 600; color: var(--ink); font-size: 0.95rem; }

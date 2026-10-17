@@ -541,7 +541,7 @@ const VALUES = [
   <div class="container hero-grid">
     <div>
       <p class="eyebrow">Energy-efficiency upgrades · ${esc(site.serviceArea)}</p>
-      <h1>Energy-efficiency upgrades &amp; retrofits for <span class="hl">Southern California</span> homes</h1>
+      <h1 class="home-title">Energy-efficiency upgrades &amp; retrofits for <span class="hl">Southern California</span> homes</h1>
       <p class="lead">Justice Energy Co. helps homeowners lower energy and water use with efficient water heaters, heat pumps, water-saving fixtures, turf replacement and LED lighting, and helps you understand the programs that may support your upgrade.</p>
       ${ctas()}
       <ul class="hero-points">
