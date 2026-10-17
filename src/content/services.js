@@ -60,6 +60,18 @@ module.exports = [
         q: 'Are there rebates for upgrading my water heater?',
         a: 'Some programs offer incentives for qualifying water heater upgrades. Availability, amounts and eligibility change and are not guaranteed, so we review the current options with you before you commit.',
       },
+      {
+        q: 'Which programs may apply to a heat pump water heater?',
+        a: 'Depending on your home and location, programs such as TECH Clean California, SoCalREN and Go Zero may support heat pump water heater upgrades. Each program sets its own eligibility, incentive amounts and funding, which can change, so we confirm what is currently available for your home before work begins.',
+      },
+      {
+        q: 'Where can a heat pump water heater be installed?',
+        a: 'Heat pump water heaters draw heat from the surrounding air, so they work best in a garage, basement or roomy utility area with good airflow, and they need a drain for condensate. We look at your current location during the consultation and explain any changes needed.',
+      },
+      {
+        q: 'How long does a water heater replacement take?',
+        a: 'Most like-for-like replacements are completed in a day. Switching to a heat pump or tankless unit can take longer if electrical, gas or venting changes are needed. We give you a timeline after the consultation.',
+      },
     ],
   },
   {
@@ -118,6 +130,18 @@ module.exports = [
         q: 'How long does a heat pump installation take?',
         a: 'Many mini-split installations are completed in one to two days. Whole-home split systems can take longer depending on ductwork and electrical needs. We give you a timeline after the consultation.',
       },
+      {
+        q: 'Which programs may help with a heat pump upgrade?',
+        a: 'Depending on your home and location, programs such as TECH Clean California, SoCalREN, Comfi and Go Zero may support heat pump heating and cooling upgrades. Each program sets its own eligibility, incentive amounts and funding, which can change, so we review the current options with you first.',
+      },
+      {
+        q: 'Can a heat pump replace both my furnace and air conditioner?',
+        a: 'Yes. A heat pump provides both heating and cooling, so one system can take the place of a separate furnace and air conditioner. We check your ductwork, electrical service and room layout to recommend the right setup.',
+      },
+      {
+        q: 'Do I need program approval before installation?',
+        a: 'Some programs require you to apply or reserve funding before equipment is purchased or installed. We go over the steps with you before any work starts so you do not lose eligibility.',
+      },
     ],
   },
   {
@@ -175,6 +199,18 @@ module.exports = [
       {
         q: 'Can water conservation upgrades lower my energy bill?',
         a: 'Using less hot water at showers and faucets means your water heater runs less, which can reduce energy use as well as water use.',
+      },
+      {
+        q: 'Are there programs for water-saving fixtures?',
+        a: 'Programs such as SoCal WaterSmart, SoCalREN and MEA may support water-saving devices in participating areas. Eligibility often depends on your water provider and property, and offerings change, so we confirm the current options before work starts.',
+      },
+      {
+        q: 'Which upgrade saves the most water?',
+        a: 'In many homes, replacing older toilets saves the most indoor water, because toilets are one of the largest indoor water users. Efficient showerheads and faucet aerators are quick additions that also reduce hot water use.',
+      },
+      {
+        q: 'Do new fixtures have to meet California standards?',
+        a: 'Yes. Plumbing fixtures sold in California must meet state water-efficiency standards. We install fixtures that meet current requirements and can point out WaterSense-labeled options.',
       },
     ],
   },
@@ -240,6 +276,18 @@ module.exports = [
         q: 'Is artificial turf included?',
         a: 'Program rules on artificial turf vary. We focus on living, climate-appropriate landscapes and can discuss your options during the consultation.',
       },
+      {
+        q: 'Which programs may support turf replacement?',
+        a: 'Programs such as SoCal WaterSmart, MEA and CRP may support turf replacement in participating areas. Rules commonly cover the area replaced, plant choices and irrigation, and many require approval before work begins, so we confirm the current requirements with you first.',
+      },
+      {
+        q: 'What replaces the lawn?',
+        a: 'Usually a mix of climate-appropriate plants, mulch or decomposed granite, and efficient drip irrigation. Some programs also ask for features that let rainwater soak into the ground. We plan the design around your yard and the program rules that apply.',
+      },
+      {
+        q: 'How long does a turf replacement project take?',
+        a: 'It depends on the size of the yard and any program approval steps. Once approvals are in place, removal and planting often take from a few days to a couple of weeks. We give you a timeline after the consultation.',
+      },
     ],
   },
   {
@@ -297,6 +345,18 @@ module.exports = [
       {
         q: 'Do you offer lighting upgrades for businesses?',
         a: 'Contact us about your property. We will let you know which services are available for your building type.',
+      },
+      {
+        q: 'Which programs may apply to LED lighting upgrades?',
+        a: 'Depending on your property and location, programs such as SoCalREN, MEA and CAMR may support lighting upgrades. Each program sets its own eligibility and incentives, which can change, so we review the current options with you before work begins.',
+      },
+      {
+        q: 'What color of LED light should I choose?',
+        a: 'LEDs come in a range of color temperatures. Warm white (about 2700K to 3000K) suits living rooms and bedrooms, while neutral white (about 3500K to 4000K) works well in kitchens, garages and work areas. We help you choose for each space.',
+      },
+      {
+        q: 'How long do LED bulbs last?',
+        a: 'Quality LEDs typically last many times longer than incandescent bulbs, so you replace them far less often. Actual lifespan depends on the product and how the lights are used.',
       },
     ],
   },
