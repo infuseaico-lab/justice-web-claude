@@ -439,10 +439,11 @@ function trustBar() {
   const items = [
     t.googleRating && { value: `${t.googleRating}<span class="trust-star" aria-hidden="true">★</span>`, label: 'Google rating', sr: `${t.googleRating} out of 5` },
     t.googleReviews && { value: esc(t.googleReviews), label: 'Google reviews' },
-    (t.licensedInsured || site.license) && { value: 'Licensed', label: t.licensedInsured ? '&amp; insured' : esc(site.license) },
-    site.address.city && { value: 'Local office', label: `in ${esc(site.address.city)}` },
+    (t.licensedInsured || site.license) && { value: 'Licensed', label: t.licensedInsured ? 'bonded &amp; insured' : esc(site.license) },
+    t.happyCustomers && { value: esc(t.happyCustomers), label: 'of happy customers' },
+    !t.happyCustomers && site.address.city && { value: 'Local office', label: `in ${esc(site.address.city)}` },
     t.yearFounded && { value: `Since ${esc(t.yearFounded)}`, label: `in ${esc(t.foundedArea || site.serviceArea)}` },
-    { value: `${programs.length} programs`, label: 'we work with' },
+    { value: String(programs.length), label: 'energy-saving programs' },
     !t.foundedArea && { value: 'LA &amp; Orange', label: 'Counties served' },
   ]
     .filter(Boolean)

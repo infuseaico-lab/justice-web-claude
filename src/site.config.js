@@ -38,7 +38,8 @@ module.exports = {
   trust: {
     googleRating: '', // TODO: e.g. '4.9'
     googleReviews: '', // TODO: e.g. '127'
-    licensedInsured: true, // shows "Licensed & insured" (a set `license` shows "Licensed" on its own)
+    licensedInsured: true, // shows "Licensed / bonded & insured" (a set `license` shows "Licensed" on its own)
+    happyCustomers: '100s', // "100s / of happy customers"; empty shows the local office instead
     yearFounded: '2001',
     foundedArea: 'Los Angeles & Orange Counties', // "Since 2001 / in …"
   },
