@@ -715,28 +715,17 @@ fieldset.field legend { padding: 0; margin-bottom: 8px; }
 .footer-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); color: #d6e0ee; }
 .footer-icon svg { width: 18px; height: 18px; }
 @media (hover: hover) and (pointer: fine) { a.footer-icon:hover { background: #f6b941; color: #16243b; } }
-@media (max-width: 479px) {
+/* Phones: the top bar shows the license and social icons; the service area is already in the hero and footer. */
+@media (max-width: 639px) {
   .topbar { font-size: 0.8125rem; }
-  .topbar-text .long { display: none; }
-  .topbar-text .short { display: inline; }
-  .topbar-icon { width: 30px; height: 30px; }
-  .topbar-info { gap: 2px 12px; padding-block: 6px; }
+  .topbar-area { display: none; }
   .topbar-license { padding-left: 0; border-left: 0; }
-  .topbar-text { min-width: 0; }
-  .topbar-text span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topbar-icon { width: 30px; height: 30px; }
 }
+/* Narrow phones: the short license form ("CSLB #1007786") so it sits on one line beside the icons. */
 @media (max-width: 389px) {
-  .topbar { font-size: 0.75rem; }
-  .topbar-inner { gap: 6px; }
-  .topbar-text { gap: 6px; }
-  .topbar-text svg { width: 14px; height: 14px; }
-  .topbar-social { gap: 0; }
-  .topbar-icon { width: 26px; height: 26px; }
-  .topbar-icon svg { width: 15px; height: 15px; }
-}
-/* The smallest phones keep the service area and license readable; the social icons stay in the footer. */
-@media (max-width: 345px) {
-  .topbar-social { display: none; }
+  .topbar-license .long { display: none; }
+  .topbar-license .short { display: inline; }
 }
 /* A backdrop filter would trap the fixed menu drawer inside the header; drop it while the menu is open. */
 body.nav-open .site-header { -webkit-backdrop-filter: none; backdrop-filter: none; background: #fff; }

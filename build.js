@@ -96,7 +96,7 @@ function topbar() {
   return `<div class="topbar">
   <div class="container topbar-inner">
     <div class="topbar-info">
-      <p class="topbar-text">${icon('pin')}<span class="long">${esc(site.topbarText)}</span><span class="short">${esc(site.topbarTextShort || site.topbarText)}</span></p>
+      <p class="topbar-text topbar-area">${icon('pin')}<span class="long">${esc(site.topbarText)}</span><span class="short">${esc(site.topbarTextShort || site.topbarText)}</span></p>
       ${site.license ? `<p class="topbar-text topbar-license">${icon('shield')}<span class="long">${esc(site.license)}</span><span class="short">${esc(site.license.replace(/\s*License\s*/i, ' '))}</span></p>` : ''}
     </div>
     <div class="topbar-social">${socialIcons('topbar-icon')}</div>
@@ -349,9 +349,12 @@ function breadcrumbs(crumbs) {
     .join('')}</ol></nav>`;
 }
 
+// "Get a consultation" buttons carry no arrow, to keep them compact on phones; other buttons keep theirs.
+const btnArrow = (label) => (/^get a consultation$/i.test(label) ? '' : ` ${icon('arrow')}`);
+
 function ctas({ primary = { href: '/contact/', label: 'Get a consultation' }, phone = true } = {}) {
   return `<div class="btn-row">
-    <a class="btn ${/consultation/i.test(primary.label) ? 'btn-accent' : 'btn-primary'} btn-lg" href="${primary.href}">${esc(primary.label)} ${icon('arrow')}</a>
+    <a class="btn ${/consultation/i.test(primary.label) ? 'btn-accent' : 'btn-primary'} btn-lg" href="${primary.href}">${esc(primary.label)}${btnArrow(primary.label)}</a>
     ${phone ? `<a class="btn btn-call btn-lg" href="tel:${site.phoneHref}">${icon('phone')} ${esc(site.phone)}</a>` : ''}
   </div>`;
 }
@@ -405,7 +408,7 @@ function featureCard() {
     <div class="card-body">
       <h3>Not sure where to start?</h3>
       <p>Tell us about your home and goals. We will help you prioritize upgrades and point out programs that may apply.</p>
-      <a class="btn btn-accent" href="/contact/">Get a consultation ${icon('arrow')}</a>
+      <a class="btn btn-accent" href="/contact/">Get a consultation</a>
     </div>
   </article>`;
 }
@@ -486,7 +489,7 @@ function ctaBand({ title = 'Ready to plan your upgrade?', text, image = 'contact
         <h2 id="cta-title">${title}</h2>
         <p>${text || 'Tell us about your property and the upgrades you have in mind. We will follow up to talk through options, next steps and programs that may apply.'}</p>
         <div class="btn-row">
-          <a class="btn btn-accent btn-lg" href="${(primary && primary.href) || '/contact/'}">${esc((primary && primary.label) || 'Get a consultation')} ${icon('arrow')}</a>
+          <a class="btn btn-accent btn-lg" href="${(primary && primary.href) || '/contact/'}">${esc((primary && primary.label) || 'Get a consultation')}${btnArrow((primary && primary.label) || 'Get a consultation')}</a>
           <a class="btn btn-call btn-lg" href="tel:${site.phoneHref}">${icon('phone')} ${esc(site.phone)}</a>
         </div>
       </div>
@@ -1028,7 +1031,7 @@ ${pageHero({
           </div>
         </div>
         <div class="form-actions">
-          <button class="btn btn-accent btn-lg" type="submit">Get a consultation ${icon('arrow')}</button>
+          <button class="btn btn-accent btn-lg" type="submit">Get a consultation</button>
           <p class="muted small" style="margin:0">Your details are used only to respond to your request.</p>
         </div>
         <div class="form-status" aria-live="polite"></div>
